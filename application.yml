@@ -1,0 +1,11 @@
+application:
+  mode: debug
+  server:
+    port: 8085
+
+datasource:
+  user:
+    dialect: mysql
+    url: jdbc:mysql://
+    username: root
+    password: 123
