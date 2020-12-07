@@ -6,10 +6,16 @@ package database
 
 import (
 	"fmt"
+	"ormissia_go/util"
 	"testing"
 )
 
 func TestInitMySql(t *testing.T) {
+
+	path := "../config"
+	//初始化配置文件
+	util.InitApplicationConfig(path, util.ConfigFileName)
+
 	db := InitMySql()
 	if db != nil {
 		fmt.Println("Connect Successful!!!")

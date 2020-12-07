@@ -5,12 +5,14 @@
 package main
 
 import (
-	"ormissia_go/config"
+	"ormissia_go/database"
 	"ormissia_go/util"
 )
 
 func main() {
 
 	//初始化配置文件
-	config.InitApplicationConfig(util.ConfigFileName)
+	util.InitApplicationConfig(util.ConfigFilePath, util.ConfigFileName)
+	//初始化数据库
+	database.InitMySql()
 }

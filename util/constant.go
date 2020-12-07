@@ -6,8 +6,10 @@ package util
 
 const (
 	//配置文件相关的常量
-	ConfigFileName = "application" //文件名
-	ConfigFileType = "yml"         //文件类型
+	ConfigFilePath    = "./config"        //文件路径
+	ConfigFileName    = "application"     //文件名
+	ConfigFileNameDev = "application-dev" //文件名
+	ConfigFileType    = "yml"             //文件类型
 )
 
 const (

@@ -3,9 +3,9 @@ server:
 
 datasource:
   driverName: mysql
-  host: 127.0.0.1
+  host: 192.168.13.110
   port: 3306
   database: blog
   username: root
-  password: 123
+  password: 5KvA82*Ziq
   charset: utf8
