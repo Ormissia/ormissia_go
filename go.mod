@@ -1,4 +1,4 @@
-module ormissia_go
+module github.com/Ormissia/ormissia_go
 
 go 1.15
 
