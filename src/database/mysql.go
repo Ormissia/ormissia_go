@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"ormissia_go/util"
+	"ormissia_go/src/util"
 )
 
 var DB *gorm.DB

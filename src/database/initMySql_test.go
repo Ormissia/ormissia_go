@@ -6,13 +6,13 @@ package database
 
 import (
 	"fmt"
-	"ormissia_go/util"
+	"ormissia_go/src/util"
 	"testing"
 )
 
 func TestInitMySql(t *testing.T) {
 
-	path := "../config"
+	path := "../../"
 	//初始化配置文件
 	util.InitApplicationConfig(path, util.ConfigFileName)
 

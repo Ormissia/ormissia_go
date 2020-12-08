@@ -7,8 +7,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"ormissia_go/database"
-	"ormissia_go/util"
+	"ormissia_go/src/database"
+	"ormissia_go/src/routers"
+	"ormissia_go/src/util"
 )
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 	database.InitMySql()
 	//注册路由
 	r := gin.Default()
-	r = CollectRoutes(r)
+	r = routers.CollectRoutes(r)
 
 	//运行
 	port := viper.GetString(util.ConfigServerPort)

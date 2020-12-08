@@ -11,7 +11,7 @@ import (
 
 func TestInitApplicationConfig(t *testing.T) {
 
-	path := "../config"
+	path := "../../"
 
 	InitApplicationConfig(path, ConfigFileName)
 
