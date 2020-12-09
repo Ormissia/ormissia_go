@@ -5,10 +5,10 @@
 package database
 
 import (
+	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"ormissia_go/src/util"
 )
 
 var DB *gorm.DB

@@ -5,8 +5,8 @@
 package util
 
 import (
+	"github.com/Ormissia/ormissia_go/src/models"
 	"github.com/dgrijalva/jwt-go"
-	"ormissia_go/src/models"
 )
 
 //jwt加密的密钥

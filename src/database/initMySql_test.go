@@ -6,7 +6,7 @@ package database
 
 import (
 	"fmt"
-	"ormissia_go/src/util"
+	"github.com/Ormissia/ormissia_go/src/util"
 	"testing"
 )
 

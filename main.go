@@ -5,11 +5,11 @@
 package main
 
 import (
+	"github.com/Ormissia/ormissia_go/src/database"
+	"github.com/Ormissia/ormissia_go/src/routers"
+	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"ormissia_go/src/database"
-	"ormissia_go/src/routers"
-	"ormissia_go/src/util"
 )
 
 func main() {

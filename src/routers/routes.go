@@ -5,8 +5,8 @@
 package routers
 
 import (
+	"github.com/Ormissia/ormissia_go/src/middleware"
 	"github.com/gin-gonic/gin"
-	"ormissia_go/src/middleware"
 )
 
 func CollectRoutes(r *gin.Engine) *gin.Engine {
