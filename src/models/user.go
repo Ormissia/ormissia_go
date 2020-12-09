@@ -3,3 +3,8 @@
 // @Author: 安红豆
 // @Description:
 package models
+
+//用户属性
+type User struct {
+	UserId string
+}
