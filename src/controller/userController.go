@@ -5,6 +5,7 @@
 package controller
 
 import (
+	"github.com/Ormissia/ormissia_go/src/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -12,26 +13,20 @@ import (
 type UserController struct {
 }
 
-type Login struct {
-	Username string
-	Password string
-}
-
-func (w *UserController) Login(c *gin.Context) {
-	var login Login
-	err := c.ShouldBind(&login)
+func (w *UserController) Login(ctx *gin.Context) {
+	requestUser := models.User{}
+	//Bind在请求过程中，如果参数错误会直接抛异常返回400状态
+	err := ctx.Bind(&requestUser)
+	//ShouldBind在请求过程中，对参数检测不做处理
+	//ctx.ShouldBind(&requestUser)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	login = Login{
-		Username: "123",
-		Password: "123",
-	}
 	// 没有数据库的用下面这个方法：这里先写死账号和密码  有数据库的要从数据库中获取
-	if login.Username != "123" || login.Password != "123" {
-		c.JSON(http.StatusOK, gin.H{
+	if requestUser.Username != "123" || requestUser.Password != "123" {
+		ctx.JSON(http.StatusOK, gin.H{
 			// 登录失败返回code 1001
 			"code":    1001,
 			"message": "failed",
@@ -39,7 +34,7 @@ func (w *UserController) Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	ctx.JSON(http.StatusOK, gin.H{
 		// 登录失败返回code 1000
 		"code":    1000,
 		"message": "success",

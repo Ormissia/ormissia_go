@@ -13,7 +13,7 @@ import (
 func LoginRouter(e *gin.Engine) {
 	loginController := &controller.UserController{}
 	//登录认证路由组
-	loginAuth := e.Group("/api/v1/user")
+	loginAuth := e.Group("/api/user")
 	{
 		loginAuth.POST("/login", loginController.Login)
 	}

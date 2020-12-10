@@ -15,7 +15,7 @@ var jwtKey = []byte("ormissia_secret")
 
 //token的Claims
 type Claims struct {
-	UserId uint
+	UserId string
 	jwt.StandardClaims
 }
 
