@@ -19,11 +19,6 @@ func Success(ctx *gin.Context, data gin.H, msg string) {
 	Response(ctx, http.StatusOK, 200, data, msg)
 }
 
-//返回失败
-func Fail(ctx *gin.Context, msg string, data gin.H) {
-	Response(ctx, http.StatusBadRequest, 400, data, msg)
-}
-
 //返回错误
 func Error(ctx *gin.Context, msg string, data gin.H) {
 	Response(ctx, http.StatusInternalServerError, 500, data, msg)

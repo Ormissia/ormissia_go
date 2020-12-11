@@ -23,7 +23,7 @@ func SelectUserInfoByUserId(userId string) (user *models.User, err error) {
 	//赋值给User
 	user = &models.User{}
 	//查询用户信息
-	err = database.DB.Table("user").Where("pk_user_id = ?", 1).Find(user).Error
+	err = database.DB.Table("user").Where("pk_user_id = ?", userId).Find(user).Error
 	if err != nil {
 		return nil, err
 	}
