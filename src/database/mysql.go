@@ -31,8 +31,3 @@ func InitMySql() *gorm.DB {
 	DB = db
 	return db
 }
-
-//获取数据库连接
-func GetDB() *gorm.DB {
-	return DB
-}

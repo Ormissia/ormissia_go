@@ -1,4 +1,4 @@
-// @File: initApplicationConfig_test
+// @File: initConfig_test
 // @Date: 2020/12/7 9:16
 // @Author: 安红豆
 // @Description: 初始化配置文件实例的测试类

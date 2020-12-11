@@ -4,13 +4,8 @@
 // @Description: 用户
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 //用户属性
 type User struct {
-	gorm.Model
 	UserId       string //用户id
 	UserRoleId   string //用户权限id
 	Username     string //用户名
