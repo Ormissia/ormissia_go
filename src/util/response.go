@@ -23,3 +23,8 @@ func Success(ctx *gin.Context, data gin.H, msg string) {
 func Error(ctx *gin.Context, msg string, data gin.H) {
 	Response(ctx, http.StatusInternalServerError, 500, data, msg)
 }
+
+//需要登录
+func Band(ctx *gin.Context, msg string, data gin.H) {
+	Response(ctx, http.StatusUnauthorized, 401, data, msg)
+}

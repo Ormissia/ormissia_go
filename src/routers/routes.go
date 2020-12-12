@@ -13,7 +13,8 @@ func CollectRoutes(r *gin.Engine) *gin.Engine {
 
 	//将中间件注册到全局，对所有路由生效
 	r.Use(middleware.Cors())
-	r.Use(middleware.RecoveryMiddleware())
+	r.Use(middleware.Auth())
+	r.Use(middleware.ErrorHandler())
 	//注册路由
 	LoginRouter(r)
 

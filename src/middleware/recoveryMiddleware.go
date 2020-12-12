@@ -1,4 +1,4 @@
-// @File: recovery
+// @File: recoveryMiddleware
 // @Date: 2020/12/11 17:49
 // @Author: 安红豆
 // @Description: 统一错误处理
@@ -10,14 +10,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RecoveryMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
+func ErrorHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				util.Error(c, fmt.Sprint(err), nil)
+				util.Error(ctx, fmt.Sprint(err), nil)
 				return
 			}
 		}()
-		c.Next()
+		ctx.Next()
 	}
 }
