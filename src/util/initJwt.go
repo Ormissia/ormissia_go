@@ -33,7 +33,7 @@ func ReleaseToken(user models.User) (string, error) {
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenStr, err := token.SignedString(jwtKey)
 	if err != nil {
 		return "", err

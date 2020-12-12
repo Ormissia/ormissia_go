@@ -16,7 +16,8 @@ func TestInitMySql(t *testing.T) {
 	//初始化配置文件
 	util.InitApplicationConfig(path, util.ConfigFileName)
 
-	db := InitMySql()
+	InitMySql()
+	db := DB
 	if db != nil {
 		fmt.Println("Connect Successful!!!")
 	} else {
