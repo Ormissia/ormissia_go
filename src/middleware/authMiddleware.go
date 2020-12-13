@@ -8,8 +8,8 @@ import (
 	"github.com/Ormissia/ormissia_go/src/dao"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"strings"
+	"time"
 )
 
 //检查token
@@ -26,24 +26,31 @@ func Auth() gin.HandlerFunc {
 		}
 
 		tokenStr = tokenStr[7:]
-		//判断token格式是否合法
+		//验证token格式是否合法
 		token, claims, err := util.ParseToken(tokenStr)
 		if err != nil || !token.Valid {
-			ctx.JSON(http.StatusUnauthorized, gin.H{"code": 401, "msg": "权限不足"})
+			util.Band(ctx, "请先登录", nil)
 			ctx.Abort()
 			return
 		}
 
-		//token格式正确，获取userId
-		userId := claims.UserId
-		user, _ := dao.SelectUserInfoByUserId(userId)
+		//token格式正确
+		//验证token是否过期
+		if claims.ExpiresAt < time.Now().Unix() {
+			util.Band(ctx, "请先登录", nil)
+			ctx.Abort()
+			return
+		}
+
+		//验证userId是否存在
+		user, _ := dao.SelectUserInfoByUserId(claims.UserId)
 		if user.UserId == "" {
-			ctx.JSON(http.StatusUnauthorized, gin.H{"code": 401, "msg": "权限不足"})
+			util.Band(ctx, "请先登录", nil)
 			ctx.Abort()
 			return
 		}
 
-		// 用户存在 将user 的信息写入上下文
+		//验证通过将user的信息写入上下文
 		ctx.Set("user", user)
 		ctx.Next()
 	}

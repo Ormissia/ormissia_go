@@ -8,8 +8,6 @@ import (
 	"github.com/Ormissia/ormissia_go/src/database"
 	"github.com/Ormissia/ormissia_go/src/routers"
 	"github.com/Ormissia/ormissia_go/src/util"
-	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
 func main() {
@@ -18,12 +16,6 @@ func main() {
 	util.InitApplicationConfig(util.ConfigFilePath, util.ConfigFileName)
 	//初始化数据库
 	database.InitMySql()
-	//注册路由
-	r := gin.Default()
-	r = routers.CollectRoutes(r)
-
-	//运行
-	port := viper.GetString(util.ConfigServerPort)
-	panic(r.Run(":" + port))
-
+	//初始化路由并运行
+	routers.InitRouter()
 }

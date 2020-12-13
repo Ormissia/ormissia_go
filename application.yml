@@ -3,8 +3,8 @@ server:
 
 datasource:
   driverName: mysql
-  host: ormissia.com
-  port: 13306
+  host: 192.168.13.110
+  port: 3306
   database: blog
   username: root
   password: 5KvA82*Ziq

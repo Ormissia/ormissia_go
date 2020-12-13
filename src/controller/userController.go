@@ -31,19 +31,18 @@ func (w *UserController) Register(ctx *gin.Context) {
 
 	//用户名密码
 	if len(username) == 0 || len(password) == 0 {
-		util.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "输入错误")
+		util.Response(ctx, http.StatusUnprocessableEntity, 422, "输入错误", nil)
 		return
 	}
 	//邮箱格式验证
 	if !util.EmailRegexp(email) {
-		util.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "输入错误")
+		util.Response(ctx, http.StatusUnprocessableEntity, 422, "输入错误", nil)
 		return
 	}
-
 	//判断用户是否存在
 	existUser, _ := dao.SelectUserInfoByUsername(username)
 	if existUser.UserId != "" {
-		util.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "该用户已存在")
+		util.Response(ctx, http.StatusUnprocessableEntity, 422, "该用户已存在", nil)
 		return
 	}
 

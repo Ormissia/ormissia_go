@@ -10,11 +10,13 @@ import (
 )
 
 //登录路由
-func LoginRouter(e *gin.Engine) {
-	loginController := &controller.UserController{}
-	//登录认证路由组
-	loginAuth := e.Group("/api/user")
+func UserRouter(e *gin.Engine) {
+	userController := &controller.UserController{}
+	//用户路由组
+	user := e.Group("/api/user")
 	{
-		loginAuth.POST("/login", loginController.Login)
+
+		user.POST("/register", userController.Register)
+		user.POST("/login", userController.Login)
 	}
 }

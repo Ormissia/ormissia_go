@@ -13,7 +13,7 @@ import (
 func Cors() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		//允许的域
-		ctx.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
+		ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		//缓存请求信息，单位为秒
 		ctx.Writer.Header().Set("Access-Control-Max-Age", "86400")
 		//服务器支持的所有跨域请求的方法,为了避免浏览次请求的多次'预检'请求

@@ -7,5 +7,5 @@ datasource:
   port: 3306
   database: blog
   username: root
-  password: 5KvA82*Ziq
+  password: 123
   charset: utf8
