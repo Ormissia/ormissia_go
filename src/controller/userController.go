@@ -7,7 +7,7 @@ package controller
 import (
 	"fmt"
 	"github.com/Ormissia/ormissia_go/src/dao"
-	"github.com/Ormissia/ormissia_go/src/models"
+	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -17,7 +17,7 @@ type UserController struct {
 }
 
 func (w *UserController) Register(ctx *gin.Context) {
-	requestUser := models.User{}
+	requestUser := model.User{}
 	//从请求中获取用户参数
 	err := ctx.Bind(&requestUser)
 	if err != nil {
@@ -41,7 +41,7 @@ func (w *UserController) Register(ctx *gin.Context) {
 	}
 	//判断用户是否存在
 	existUser, _ := dao.SelectUserInfoByUsername(username)
-	if existUser.UserId != "" {
+	if existUser.ID != 0 {
 		util.Response(ctx, http.StatusUnprocessableEntity, 422, "该用户已存在", nil)
 		return
 	}
@@ -57,7 +57,7 @@ func (w *UserController) Register(ctx *gin.Context) {
 }
 
 func (w *UserController) Login(ctx *gin.Context) {
-	requestUser := models.User{}
+	requestUser := model.User{}
 	//Bind在请求过程中，如果参数错误会直接抛异常返回400状态
 	err := ctx.Bind(&requestUser)
 	//ShouldBind在请求过程中，对参数检测不做处理
@@ -67,7 +67,7 @@ func (w *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
-	user, err := dao.SelectUserInfoByUserId(requestUser.UserId)
+	user, err := dao.SelectUserInfoByUserId(requestUser.ID)
 	fmt.Println(user)
 
 	// 没有数据库的用下面这个方法：这里先写死账号和密码  有数据库的要从数据库中获取

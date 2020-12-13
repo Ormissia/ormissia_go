@@ -5,10 +5,12 @@
 package database
 
 import (
+	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"time"
 )
 
 var DB *gorm.DB
@@ -27,6 +29,22 @@ func InitMySql() *gorm.DB {
 	if err != nil {
 		panic("failed to connect database, err: " + err.Error())
 	}
+
+	//自动迁移
+	err = db.AutoMigrate(&model.User{}, &model.Type{}, &model.Tag{}, &model.Article{})
+	if err != nil {
+		panic("failed to connect database, err: " + err.Error())
+	}
+
+	sqlDB, err := db.DB()
+	//设置连接池中最大闲置连接数
+	sqlDB.SetMaxIdleConns(10)
+
+	//设置数据库的最大连接数量
+	sqlDB.SetMaxOpenConns(100)
+
+	//设置连接的最大可复用时间
+	sqlDB.SetConnMaxLifetime(time.Second * 10)
 	//创建数据库连接成功，并将连接返回
 	DB = db
 	return db

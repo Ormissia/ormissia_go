@@ -5,7 +5,7 @@
 package util
 
 import (
-	"github.com/Ormissia/ormissia_go/src/models"
+	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
@@ -15,16 +15,16 @@ var jwtKey = []byte("ormissia_secret")
 
 //token的Claims
 type Claims struct {
-	UserId string
+	UserId uint
 	jwt.StandardClaims
 }
 
 //登录成功后调用此方法发送token
-func ReleaseToken(user models.User) (string, error) {
+func ReleaseToken(user model.User) (string, error) {
 	//token过期时间
 	expirationTime := time.Now().Add(7 * 24 * time.Hour)
 	var claims = &Claims{
-		UserId: user.UserId,
+		UserId: user.ID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 			IssuedAt:  time.Now().Unix(),

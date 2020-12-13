@@ -44,7 +44,7 @@ func Auth() gin.HandlerFunc {
 
 		//验证userId是否存在
 		user, _ := dao.SelectUserInfoByUserId(claims.UserId)
-		if user.UserId == "" {
+		if user.ID == 0 {
 			util.Band(ctx, "请先登录", nil)
 			ctx.Abort()
 			return

@@ -6,15 +6,15 @@ package util
 
 import (
 	"fmt"
-	"github.com/Ormissia/ormissia_go/src/models"
+	"github.com/Ormissia/ormissia_go/src/model"
 	"testing"
 )
 
 func TestReleaseToken(t *testing.T) {
-	user := models.User{
-		UserId:   "123",
+	user := model.User{
 		Username: "ormissia",
 	}
+	user.ID = 123
 
 	tokenStr, err := ReleaseToken(user)
 	if err == nil {

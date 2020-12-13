@@ -6,12 +6,12 @@ package dao
 
 import (
 	"github.com/Ormissia/ormissia_go/src/database"
-	"github.com/Ormissia/ormissia_go/src/models"
+	"github.com/Ormissia/ormissia_go/src/model"
 )
 
 //增
 //插入一个新用户
-func InsertUser(user models.User) (err error) {
+func InsertUser(user model.User) (err error) {
 	return database.DB.Create(user).Error
 }
 
@@ -19,11 +19,11 @@ func InsertUser(user models.User) (err error) {
 
 //查
 //根据用户id查询用户信息
-func SelectUserInfoByUserId(userId string) (user *models.User, err error) {
+func SelectUserInfoByUserId(id uint) (user *model.User, err error) {
 	//赋值给User
-	user = &models.User{}
+	user = &model.User{}
 	//查询用户信息
-	err = database.DB.Table("user").Where("pk_user_id = ?", userId).Find(user).Error
+	err = database.DB.Table("user").Where("id = ?", id).Find(user).Error
 	if err != nil {
 		return nil, err
 	}
@@ -31,9 +31,9 @@ func SelectUserInfoByUserId(userId string) (user *models.User, err error) {
 }
 
 //根据用户名称查询用户信息
-func SelectUserInfoByUsername(username string) (user *models.User, err error) {
+func SelectUserInfoByUsername(username string) (user *model.User, err error) {
 	//赋值给User
-	user = &models.User{}
+	user = &model.User{}
 	//查询用户信息
 	err = database.DB.Table("user").Where("username = ?", username).Find(user).Error
 	if err != nil {
