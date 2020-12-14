@@ -6,7 +6,6 @@ package controller
 
 import (
 	"fmt"
-	"github.com/Ormissia/ormissia_go/src/dao"
 	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
@@ -40,14 +39,14 @@ func (w *UserController) Register(ctx *gin.Context) {
 		return
 	}
 	//判断用户是否存在
-	existUser, _ := dao.SelectUserInfoByUsername(username)
+	existUser, _ := model.SelectUserInfoByUsername(username)
 	if existUser.ID != 0 {
 		util.Response(ctx, http.StatusUnprocessableEntity, 422, "该用户已存在", nil)
 		return
 	}
 
 	//往数据库中插入该注册用户
-	result := dao.InsertUser(requestUser)
+	result := model.InsertUser(requestUser)
 	if result != nil {
 		//插入出错
 	}
@@ -67,7 +66,7 @@ func (w *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
-	user, err := dao.SelectUserInfoByUserId(requestUser.ID)
+	user, err := model.SelectUserInfoByUserId(requestUser.ID)
 	fmt.Println(user)
 
 	// 没有数据库的用下面这个方法：这里先写死账号和密码  有数据库的要从数据库中获取

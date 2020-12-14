@@ -17,3 +17,11 @@ type Tag struct {
 func (Tag) TableName() string {
 	return "tag"
 }
+
+//增
+
+//删
+
+//查
+
+//改
