@@ -6,20 +6,17 @@ package util
 
 import (
 	"flag"
-	"fmt"
 	"github.com/spf13/viper"
 )
 
 //初始化配置文件
 func InitApplicationConfig(configFilePath, configFileName string) {
 	//读取命令行配置文件的参数
-	suffix := flag.String("suffix", "", "ConfigFile")
+	suffix := flag.String("config", "", "Config file suffix")
 	flag.Parse()
 
-	fmt.Println(suffix)
-
 	viper.AddConfigPath(configFilePath)
-	viper.SetConfigName(configFileName)
+	viper.SetConfigName(configFileName + *suffix)
 	viper.SetConfigType(ConfigFileType)
 	err := viper.ReadInConfig()
 	if err != nil {

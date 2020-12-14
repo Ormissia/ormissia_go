@@ -5,7 +5,6 @@
 package model
 
 import (
-	"github.com/Ormissia/ormissia_go/src/database"
 	"gorm.io/gorm"
 )
 
@@ -24,38 +23,3 @@ type User struct {
 func (User) TableName() string {
 	return "user"
 }
-
-//增
-//插入一个新用户
-func InsertUser(user User) (err error) {
-	return database.DB.Create(user).Error
-}
-
-//删
-
-//查
-//根据用户id查询用户信息
-func SelectUserInfoByUserId(id uint) (user *User, err error) {
-	//赋值给User
-	user = &User{}
-	//查询用户信息
-	err = database.DB.Table("user").Where("id = ?", id).Find(user).Error
-	if err != nil {
-		return nil, err
-	}
-	return
-}
-
-//根据用户名称查询用户信息
-func SelectUserInfoByUsername(username string) (user *User, err error) {
-	//赋值给User
-	user = &User{}
-	//查询用户信息
-	err = database.DB.Table("user").Where("username = ?", username).Find(user).Error
-	if err != nil {
-		return nil, err
-	}
-	return
-}
-
-//改

@@ -28,11 +28,3 @@ type Article struct {
 func (Article) TableName() string {
 	return "article"
 }
-
-//增
-
-//删
-
-//查
-
-//改

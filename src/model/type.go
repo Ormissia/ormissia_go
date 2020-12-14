@@ -17,11 +17,3 @@ type Type struct {
 func (Type) TableName() string {
 	return "type"
 }
-
-//增
-
-//删
-
-//查
-
-//改
