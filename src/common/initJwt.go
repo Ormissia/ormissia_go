@@ -2,7 +2,7 @@
 // @Date: 2020/12/7 8:58
 // @Author: 安红豆
 // @Description: jwt
-package util
+package common
 
 import (
 	"github.com/Ormissia/ormissia_go/src/model"

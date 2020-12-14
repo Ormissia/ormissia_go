@@ -10,7 +10,7 @@ import "gorm.io/gorm"
 type Tag struct {
 	Article []Article `json:"article" gorm:"-"` //标签下的文章
 	gorm.Model
-	TagName string `json:"tag_name" gorm:"type:varchar(20);not null"` //标签名字
+	TagName string `json:"tag_name" gorm:"type:varchar(100);not null"` //标签名字
 }
 
 //实现gorm的接口，重命名表名

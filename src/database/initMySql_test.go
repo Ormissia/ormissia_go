@@ -6,6 +6,7 @@ package database
 
 import (
 	"fmt"
+	"github.com/Ormissia/ormissia_go/src/common"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"testing"
 )
@@ -14,7 +15,7 @@ func TestInitMySql(t *testing.T) {
 
 	path := "../../"
 	//初始化配置文件
-	util.InitApplicationConfig(path, util.ConfigFileName)
+	common.InitApplicationConfig(path, util.ConfigFileName)
 
 	InitMySql()
 	db := DB

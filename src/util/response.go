@@ -15,16 +15,21 @@ func Response(ctx *gin.Context, httpState int, code int, msg string, data gin.H)
 }
 
 //返回成功
-func Success(ctx *gin.Context, data gin.H, msg string) {
-	Response(ctx, http.StatusOK, 200, msg, data)
+func Success(ctx *gin.Context, msg string, data gin.H) {
+	Response(ctx, http.StatusOK, HttpSuccess, msg, data)
 }
 
 //返回错误
 func Error(ctx *gin.Context, msg string, data gin.H) {
-	Response(ctx, http.StatusInternalServerError, 500, msg, data)
+	Response(ctx, http.StatusInternalServerError, httpError, msg, data)
 }
 
 //需要登录
 func Band(ctx *gin.Context, msg string, data gin.H) {
-	Response(ctx, http.StatusUnauthorized, 401, msg, data)
+	Response(ctx, http.StatusUnauthorized, http.StatusUnauthorized, msg, data)
+}
+
+//参数错误
+func ParameterError(ctx *gin.Context, msg string, data gin.H) {
+	Response(ctx, http.StatusUnprocessableEntity, http.StatusUnprocessableEntity, msg, data)
 }

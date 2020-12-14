@@ -31,32 +31,34 @@ func (w *UserController) Register(ctx *gin.Context) {
 
 	//用户名密码
 	if len(username) == 0 || len(password) == 0 {
-		util.Response(ctx, http.StatusUnprocessableEntity, 422, "输入错误", nil)
+		util.ParameterError(ctx, util.GetErrorMsg(util.ErrorIllegalInput), nil)
 		return
 	}
 	//邮箱格式验证(当邮箱长度不为0时进行格式验证)
 	if len(email) != 0 && !util.EmailRegexp(email) {
-		util.Response(ctx, http.StatusUnprocessableEntity, 422, "输入错误", nil)
+		util.ParameterError(ctx, util.GetErrorMsg(util.ErrorIllegalInput), nil)
 		return
 	}
 	//判断用户是否存在
 	existUser, _ := dao.SelectUserInfoByUsername(username)
 	if existUser.ID != 0 {
-		util.Response(ctx, http.StatusUnprocessableEntity, 422, "该用户已存在", nil)
+		util.Error(ctx, util.GetErrorMsg(util.ErrorUsernameUsed), nil)
 		return
 	}
 
 	//往数据库中插入该注册用户
-	result := dao.InsertUser(requestUser)
-	if result != nil {
+	err = dao.InsertUser(requestUser)
+	if err != nil {
 		//插入出错
-		util.Error(ctx, "插入用户出错", nil)
+		util.Error(ctx, err.Error(), nil)
+		return
 	}
 	//插入成功
-	util.Success(ctx, nil, "注册成功")
+	util.Success(ctx, util.GetErrorMsg(util.SuccessUserRegister), nil)
 	return
 }
 
+//登录
 func (w *UserController) Login(ctx *gin.Context) {
 	requestUser := model.User{}
 	//Bind在请求过程中，如果参数错误会直接抛异常返回400状态
@@ -68,11 +70,12 @@ func (w *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
-	user, err := dao.SelectUserInfoByUserId(requestUser.ID)
+	user, err := dao.SelectUserInfoByUsername(requestUser.Username)
 	fmt.Println(user)
 
 	// 没有数据库的用下面这个方法：这里先写死账号和密码  有数据库的要从数据库中获取
 	if requestUser.Username != "123" || requestUser.Password != "123" {
+
 		ctx.JSON(http.StatusOK, gin.H{
 			// 登录失败返回code 1001
 			"code":    1001,
@@ -81,10 +84,8 @@ func (w *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
-		// 登录失败返回code 1000
-		"code":    1000,
-		"message": "success",
-	})
+	//刷新token
+	//返回登录成功
+	util.Success(ctx, util.GetErrorMsg(util.HttpSuccess), nil)
 	return
 }

@@ -5,6 +5,7 @@
 package middleware
 
 import (
+	"github.com/Ormissia/ormissia_go/src/common"
 	"github.com/Ormissia/ormissia_go/src/dao"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
@@ -27,7 +28,7 @@ func Auth() gin.HandlerFunc {
 
 		tokenStr = tokenStr[7:]
 		//验证token格式是否合法
-		token, claims, err := util.ParseToken(tokenStr)
+		token, claims, err := common.ParseToken(tokenStr)
 		if err != nil || !token.Valid {
 			util.Band(ctx, "请先登录", nil)
 			ctx.Abort()

@@ -23,7 +23,7 @@ func SelectUserInfoByUserId(id uint) (user *model.User, err error) {
 	//赋值给User
 	user = &model.User{}
 	//查询用户信息
-	err = database.DB.Table("user").Where("id = ?", id).Find(user).Error
+	err = database.DB.Table("user").Where("id = ?", id).Find(&user).Error
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func SelectUserInfoByUsername(username string) (user *model.User, err error) {
 	//赋值给User
 	user = &model.User{}
 	//查询用户信息
-	err = database.DB.Table("user").Where("username = ?", username).Find(user).Error
+	err = database.DB.Table("user").Where("username = ?", username).Find(&user).Error
 	if err != nil {
 		return nil, err
 	}
