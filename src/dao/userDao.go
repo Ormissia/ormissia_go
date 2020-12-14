@@ -12,7 +12,7 @@ import (
 //增
 //插入一个新用户
 func InsertUser(user model.User) (err error) {
-	return database.DB.Create(user).Error
+	return database.DB.Create(&user).Error
 }
 
 //删

@@ -15,7 +15,6 @@ func UserRouter(e *gin.Engine) {
 	//用户路由组
 	user := e.Group("/api/user")
 	{
-
 		user.POST("/register", userController.Register)
 		user.POST("/login", userController.Login)
 	}

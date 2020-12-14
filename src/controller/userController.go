@@ -34,8 +34,8 @@ func (w *UserController) Register(ctx *gin.Context) {
 		util.Response(ctx, http.StatusUnprocessableEntity, 422, "输入错误", nil)
 		return
 	}
-	//邮箱格式验证
-	if !util.EmailRegexp(email) {
+	//邮箱格式验证(当邮箱长度不为0时进行格式验证)
+	if len(email) != 0 && !util.EmailRegexp(email) {
 		util.Response(ctx, http.StatusUnprocessableEntity, 422, "输入错误", nil)
 		return
 	}
@@ -50,6 +50,7 @@ func (w *UserController) Register(ctx *gin.Context) {
 	result := dao.InsertUser(requestUser)
 	if result != nil {
 		//插入出错
+		util.Error(ctx, "插入用户出错", nil)
 	}
 	//插入成功
 	util.Success(ctx, nil, "注册成功")
