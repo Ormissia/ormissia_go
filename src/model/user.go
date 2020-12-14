@@ -17,7 +17,7 @@ type User struct {
 	Email    string `json:"email" gorm:"type:varchar(20)"`             //邮箱
 	Phone    string `json:"phone" gorm:"type:varchar(20)"`             //手机号
 	Avatar   string `json:"avatar" gorm:"type:varchar(20)"`            //头像
-	Role     int    `json:"avatar" gorm:"type:int"`                    //头像
+	Role     int    `json:"role" gorm:"type:int"`                      //头像
 }
 
 //实现gorm的接口，重命名表名

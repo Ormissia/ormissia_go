@@ -1,7 +1,7 @@
 // @File: constant
 // @Date: 2020/12/7 9:01
 // @Author: 安红豆
-// @Description: 常量类
+// @Description: 系统常量
 package util
 
 const (

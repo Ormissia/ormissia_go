@@ -31,7 +31,12 @@ func InitMySql() *gorm.DB {
 	}
 
 	//自动迁移
-	err = db.AutoMigrate(&model.User{}, &model.Type{}, &model.Tag{}, &model.Article{})
+	err = db.AutoMigrate(
+		&model.User{},
+		&model.Type{},
+		&model.Tag{},
+		&model.Article{},
+	)
 	if err != nil {
 		panic("failed to connect database, err: " + err.Error())
 	}

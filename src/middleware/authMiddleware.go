@@ -5,7 +5,7 @@
 package middleware
 
 import (
-	"github.com/Ormissia/ormissia_go/src/dao"
+	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
 	"strings"
@@ -43,7 +43,7 @@ func Auth() gin.HandlerFunc {
 		}
 
 		//验证userId是否存在
-		user, _ := dao.SelectUserInfoByUserId(claims.UserId)
+		user, _ := model.SelectUserInfoByUserId(claims.UserId)
 		if user.ID == 0 {
 			util.Band(ctx, "请先登录", nil)
 			ctx.Abort()
