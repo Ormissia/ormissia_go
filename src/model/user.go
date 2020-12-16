@@ -30,3 +30,10 @@ func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
 	u.Password = util.StringConvertMD5(u.Password)
 	return nil
 }
+
+//分页查询的属性
+type UserPage struct {
+	PageNum  string //第几页
+	PageSize string //每页数量
+	User
+}

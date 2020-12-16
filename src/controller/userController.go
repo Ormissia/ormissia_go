@@ -5,7 +5,7 @@
 package controller
 
 import (
-	"fmt"
+	"github.com/Ormissia/ormissia_go/src/common"
 	"github.com/Ormissia/ormissia_go/src/dao"
 	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
@@ -21,7 +21,7 @@ func (w *UserController) Register(ctx *gin.Context) {
 	//从请求中获取用户参数
 	err := ctx.Bind(&requestUser)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		util.ParameterError(ctx, err.Error(), nil)
 		return
 	}
 	//获取参数
@@ -31,18 +31,18 @@ func (w *UserController) Register(ctx *gin.Context) {
 
 	//用户名密码
 	if len(username) == 0 || len(password) == 0 {
-		util.ParameterError(ctx, util.GetErrorMsg(util.ErrorIllegalInput), nil)
+		util.ParameterError(ctx, util.GetCodeMsg(util.ErrorIllegalInput), nil)
 		return
 	}
 	//邮箱格式验证(当邮箱长度不为0时进行格式验证)
 	if len(email) != 0 && !util.EmailRegexp(email) {
-		util.ParameterError(ctx, util.GetErrorMsg(util.ErrorIllegalInput), nil)
+		util.ParameterError(ctx, util.GetCodeMsg(util.ErrorIllegalInput), nil)
 		return
 	}
 	//判断用户是否存在
 	existUser, _ := dao.SelectUserInfoByUsername(username)
 	if existUser.ID != 0 {
-		util.Error(ctx, util.GetErrorMsg(util.ErrorUsernameUsed), nil)
+		util.Error(ctx, util.GetCodeMsg(util.ErrorUsernameUsed), nil)
 		return
 	}
 
@@ -54,7 +54,7 @@ func (w *UserController) Register(ctx *gin.Context) {
 		return
 	}
 	//插入成功
-	util.Success(ctx, util.GetErrorMsg(util.SuccessUserRegister), nil)
+	util.Success(ctx, util.GetCodeMsg(util.SuccessUserRegister), nil)
 	return
 }
 
@@ -71,21 +71,20 @@ func (w *UserController) Login(ctx *gin.Context) {
 	}
 
 	user, err := dao.SelectUserInfoByUsername(requestUser.Username)
-	fmt.Println(user)
 
 	// 没有数据库的用下面这个方法：这里先写死账号和密码  有数据库的要从数据库中获取
-	if requestUser.Username != "123" || requestUser.Password != "123" {
-
+	if requestUser.Password != user.Password {
 		ctx.JSON(http.StatusOK, gin.H{
 			// 登录失败返回code 1001
-			"code":    1001,
-			"message": "failed",
+			"code":    util.ErrorPasswordWrong,
+			"message": util.GetCodeMsg(util.ErrorPasswordWrong),
 		})
 		return
 	}
 
-	//刷新token
+	//生成token
+	token, _ := common.ReleaseToken(requestUser)
 	//返回登录成功
-	util.Success(ctx, util.GetErrorMsg(util.HttpSuccess), nil)
+	util.Response(ctx, http.StatusOK, util.HttpSuccess, "登录成功", nil, token)
 	return
 }

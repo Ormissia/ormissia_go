@@ -19,6 +19,7 @@ const (
 
 	SuccessUserRegister = 1050 //注册成功
 	//code=2000...文章模块的错误
+	ErrorArticleNotFound = 2001 //文章未找到
 
 	//code=3000...分类模块的错误
 
@@ -36,8 +37,10 @@ var codeMsg = map[int]string{
 	ErrorTokenOverTime: "token过期",
 
 	SuccessUserRegister: "注册成功",
+
+	ErrorArticleNotFound: "文章未找到",
 }
 
-func GetErrorMsg(code int) string {
+func GetCodeMsg(code int) string {
 	return codeMsg[code]
 }

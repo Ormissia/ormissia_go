@@ -30,8 +30,6 @@ func collectRoutes(r *gin.Engine) *gin.Engine {
 
 	//注册路由
 	UserRouter(r)
-	//将登录验证的中间件注册到全局
-	r.Use(middleware.Auth())
 	ArticleRouter(r)
 
 	return r

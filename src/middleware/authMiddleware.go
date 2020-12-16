@@ -20,8 +20,8 @@ func Auth() gin.HandlerFunc {
 		tokenStr := ctx.GetHeader("Authorization")
 
 		//判断是否有token
-		if tokenStr == "" || !strings.HasPrefix(tokenStr, "Bearer") {
-			util.Band(ctx, "请先登录", nil)
+		if tokenStr == "" || !strings.HasPrefix(tokenStr, "Bearer ") {
+			util.Band(ctx, util.GetCodeMsg(util.ErrorTokenOverTime), nil)
 			ctx.Abort()
 			return
 		}
@@ -30,7 +30,7 @@ func Auth() gin.HandlerFunc {
 		//验证token格式是否合法
 		token, claims, err := common.ParseToken(tokenStr)
 		if err != nil || !token.Valid {
-			util.Band(ctx, "请先登录", nil)
+			util.Band(ctx, util.GetCodeMsg(util.ErrorTokenOverTime), nil)
 			ctx.Abort()
 			return
 		}
@@ -38,21 +38,21 @@ func Auth() gin.HandlerFunc {
 		//token格式正确
 		//验证token是否过期
 		if claims.ExpiresAt < time.Now().Unix() {
-			util.Band(ctx, "请先登录", nil)
+			util.Band(ctx, util.GetCodeMsg(util.ErrorTokenOverTime), nil)
 			ctx.Abort()
 			return
 		}
 
 		//验证userId是否存在
-		user, _ := dao.SelectUserInfoByUserId(claims.UserId)
+		user, _ := dao.SelectUserInfoByUsername(claims.Username)
 		if user.ID == 0 {
-			util.Band(ctx, "请先登录", nil)
+			util.Band(ctx, util.GetCodeMsg(util.ErrorTokenOverTime), nil)
 			ctx.Abort()
 			return
 		}
 
 		//验证通过将user的信息写入上下文
-		ctx.Set("user", user)
+		ctx.Set("username", user.Username)
 		ctx.Next()
 	}
 }

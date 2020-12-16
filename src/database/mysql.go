@@ -10,6 +10,7 @@ import (
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"time"
 )
 
@@ -24,8 +25,10 @@ func InitMySql() *gorm.DB {
 	password := viper.GetString(util.ConfigDataSourcePassword)
 	charset := viper.GetString(util.ConfigDataSourceCharset)
 	dsn := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + database + "?charset=" + charset + "&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		//配置打印日志
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		panic("failed to connect database, err: " + err.Error())
 	}

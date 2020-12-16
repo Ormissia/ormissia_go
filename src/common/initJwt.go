@@ -15,7 +15,7 @@ var jwtKey = []byte("ormissia_secret")
 
 //token的Claims
 type Claims struct {
-	UserId uint
+	Username string
 	jwt.StandardClaims
 }
 
@@ -24,7 +24,7 @@ func ReleaseToken(user model.User) (string, error) {
 	//token过期时间
 	expirationTime := time.Now().Add(7 * 24 * time.Hour)
 	var claims = &Claims{
-		UserId: user.ID,
+		Username: user.Username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 			IssuedAt:  time.Now().Unix(),

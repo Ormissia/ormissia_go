@@ -17,3 +17,10 @@ type Tag struct {
 func (Tag) TableName() string {
 	return "tag"
 }
+
+//分页查询的属性
+type TagPage struct {
+	PageNum  string //第几页
+	PageSize string //每页数量
+	Tag
+}
