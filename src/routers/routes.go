@@ -31,6 +31,7 @@ func collectRoutes(r *gin.Engine) *gin.Engine {
 	//注册路由
 	UserRouter(r)
 	ArticleRouter(r)
+	FileRouter(r)
 
 	return r
 }

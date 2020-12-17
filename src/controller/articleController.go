@@ -9,8 +9,6 @@ import (
 	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"strconv"
 )
 
 type ArticleController struct {
@@ -33,11 +31,6 @@ func (w *ArticleController) SelectArticleById(ctx *gin.Context) {
 	article, err := dao.SelectArticleById(articleId)
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)
-		return
-	}
-	//文章未找到
-	if articleId != strconv.Itoa(int(article.ID)) {
-		util.Response(ctx, http.StatusInternalServerError, util.ErrorArticleNotFound, util.GetCodeMsg(util.ErrorArticleNotFound), nil, "")
 		return
 	}
 	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), article)

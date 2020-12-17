@@ -1,6 +1,8 @@
+#服务器配置
 server:
   port: 8085
 
+#数据库配置
 datasource:
   driverName: mysql
   host: 192.168.13.110
@@ -9,3 +11,8 @@ datasource:
   username: root
   password: 5KvA82*Ziq
   charset: utf8
+
+#文件配置
+filePath:
+  #路径结尾必须带斜杠
+  image: /WEB/top-image/
