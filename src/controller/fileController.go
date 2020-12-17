@@ -36,5 +36,8 @@ func (w *FileController) UploadImage(ctx *gin.Context) {
 		util.Error(ctx, err.Error(), nil)
 		return
 	}
-	util.Success(ctx, "保存成功", nil)
+	data := map[string]string{
+		"uri": path + fileName,
+	}
+	util.Success(ctx, "保存成功", data)
 }
