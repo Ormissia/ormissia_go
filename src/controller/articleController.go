@@ -52,7 +52,16 @@ func (w *ArticleController) SelectArticleByPage(ctx *gin.Context) {
 		util.ParameterError(ctx, err.Error(), nil)
 		return
 	}
+	//根据分页参数查询博客总数
+	count, err := dao.CountArticleByPage(page)
+	if err != nil {
+		util.ParameterError(ctx, err.Error(), nil)
+		return
+	}
 	//返回成功
-	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), articles)
+	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), map[string]interface{}{
+		"count":    count,
+		"articles": articles,
+	})
 	return
 }
