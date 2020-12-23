@@ -15,8 +15,8 @@ type Tag struct {
 
 //分页查询的属性
 type TagPage struct {
-	PageNum  string //第几页
-	PageSize string //每页数量
+	PageNum  int //第几页
+	PageSize int //每页数量
 	Tag
 }
 
