@@ -6,7 +6,6 @@ package model
 
 import (
 	"gorm.io/gorm"
-	"time"
 )
 
 //博客属性
@@ -37,18 +36,4 @@ type ArticlePage struct {
 //实现gorm的接口，重命名表名
 func (Article) TableName() string {
 	return "article"
-}
-
-// TODO 更新时候创建时间为零值会有问题
-//保存之前设置创建和更新时间
-func (a Article) BeforeCreate(tx *gorm.DB) (err error) {
-	//判断新增还是修改，并赋默认值
-	if a.ID == 0 {
-		//id为0的时候是新增
-		a.CreatedAt = time.Now()
-	} else {
-		//id不为0的时候是修改
-		a.UpdatedAt = time.Now()
-	}
-	return
 }

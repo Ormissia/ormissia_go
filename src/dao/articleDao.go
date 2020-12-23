@@ -88,3 +88,7 @@ func CountArticleByPage(page model.ArticlePage) (count int, err error) {
 }
 
 //改
+func UpdateArticle(article model.Article) (err error) {
+	err = database.DB.Omit("id", "created_at").Updates(&article).Error
+	return
+}

@@ -25,7 +25,13 @@ func (w *ArticleController) SaveArticle(ctx *gin.Context) {
 	}
 
 	//执行插入或修改操作
-	err = dao.InsertArticle(article)
+	if article.ID == 0 {
+		//当id等于0时为新增操作
+		err = dao.InsertArticle(article)
+	} else {
+		//当id不等0时为修改操作
+		err = dao.UpdateArticle(article)
+	}
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)
 		return
