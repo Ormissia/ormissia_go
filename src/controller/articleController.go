@@ -16,7 +16,21 @@ type ArticleController struct {
 
 //保存文章（新增和修改）
 func (w *ArticleController) SaveArticle(ctx *gin.Context) {
+	article := model.Article{}
+	//从请求中获取参数
+	err := ctx.Bind(&article)
+	if err != nil {
+		util.Error(ctx, err.Error(), nil)
+		return
+	}
 
+	//执行插入或修改操作
+	err = dao.InsertArticle(article)
+	if err != nil {
+		util.Error(ctx, err.Error(), nil)
+		return
+	}
+	util.Success(ctx, "保存成功", nil)
 }
 
 //删除文章

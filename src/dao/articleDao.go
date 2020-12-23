@@ -10,6 +10,10 @@ import (
 )
 
 //增
+func InsertArticle(article model.Article) (err error) {
+	err = database.DB.Save(&article).Error
+	return
+}
 
 //删
 

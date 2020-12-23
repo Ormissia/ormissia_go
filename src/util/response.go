@@ -26,7 +26,7 @@ func Success(ctx *gin.Context, msg string, data interface{}) {
 
 //返回错误
 func Error(ctx *gin.Context, msg string, data gin.H) {
-	Response(ctx, http.StatusInternalServerError, httpError, msg, data, "")
+	Response(ctx, http.StatusInternalServerError, HttpError, msg, data, "")
 }
 
 //需要登录

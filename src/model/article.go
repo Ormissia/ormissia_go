@@ -4,7 +4,10 @@
 // @Description: 博客
 package model
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 //博客属性
 type Article struct {
@@ -24,14 +27,28 @@ type Article struct {
 	IsPublished bool   `json:"is_published" gorm:"int;default:false"`     //是否发布（发布、草稿）
 }
 
-//实现gorm的接口，重命名表名
-func (Article) TableName() string {
-	return "article"
-}
-
 //分页查询的属性
 type ArticlePage struct {
 	PageNum  int //第几页
 	PageSize int //每页数量
 	Article
+}
+
+//实现gorm的接口，重命名表名
+func (Article) TableName() string {
+	return "article"
+}
+
+// TODO 更新时候创建时间为零值会有问题
+//保存之前设置创建和更新时间
+func (a Article) BeforeCreate(tx *gorm.DB) (err error) {
+	//判断新增还是修改，并赋默认值
+	if a.ID == 0 {
+		//id为0的时候是新增
+		a.CreatedAt = time.Now()
+	} else {
+		//id不为0的时候是修改
+		a.UpdatedAt = time.Now()
+	}
+	return
 }

@@ -13,14 +13,14 @@ type Type struct {
 	TypeName string `json:"type_name" gorm:"type:varchar(100);not null"` //类型名字
 }
 
-//实现gorm的接口，重命名表名
-func (Type) TableName() string {
-	return "type"
-}
-
 //分页查询的属性
 type TypePage struct {
 	PageNum  string //第几页
 	PageSize string //每页数量
 	Type
+}
+
+//实现gorm的接口，重命名表名
+func (Type) TableName() string {
+	return "type"
 }

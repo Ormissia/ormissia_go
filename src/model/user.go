@@ -20,6 +20,13 @@ type User struct {
 	Role     int    `json:"role" gorm:"type:int"`                       //角色
 }
 
+//分页查询的属性
+type UserPage struct {
+	PageNum  string //第几页
+	PageSize string //每页数量
+	User
+}
+
 //实现gorm的接口，重命名表名
 func (User) TableName() string {
 	return "user"
@@ -29,11 +36,4 @@ func (User) TableName() string {
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
 	u.Password = util.StringConvertMD5(u.Password)
 	return nil
-}
-
-//分页查询的属性
-type UserPage struct {
-	PageNum  string //第几页
-	PageSize string //每页数量
-	User
 }

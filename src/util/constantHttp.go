@@ -7,7 +7,7 @@ package util
 //状态码常量
 const (
 	HttpSuccess = 200
-	httpError   = 500
+	HttpError   = 500
 
 	//code=1000...用户模块的错误
 	ErrorUsernameUsed  = 1001 //用户名已存在
@@ -28,7 +28,7 @@ const (
 
 var codeMsg = map[int]string{
 	HttpSuccess:        "OK",
-	httpError:          "Error",
+	HttpError:          "Error",
 	ErrorUsernameUsed:  "用户名已存在",
 	ErrorPasswordWrong: "密码错误",
 	ErrorUserNotExist:  "用户不存在",
