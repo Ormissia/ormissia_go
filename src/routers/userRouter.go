@@ -12,7 +12,7 @@ import (
 //登录路由
 func UserRouter(e *gin.Engine) {
 	userController := &controller.UserController{}
-	//用户路由组
+	//路由组
 	user := e.Group("/api/user")
 	{
 		user.POST("/register", userController.Register)

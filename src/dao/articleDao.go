@@ -37,7 +37,7 @@ func SelectArticleByPage(page model.ArticlePage) (articles []model.Article, err 
 		//指定查询字段(主要是为了排除content字段)
 		// TODO 嵌套结构体的查询
 		Select("article.id", "article.created_at", "article.updated_at",
-			"article.deleted_at", "user_id", "type_id", "top_image", "title",
+			"article.deleted_at", "user_id", "type_id", "type_name", "top_image", "title",
 			"description", "visits", "is_deleted", "is_recommend", "is_published").
 		Table("article").
 		//连接用户表和类型标签表
@@ -45,14 +45,20 @@ func SelectArticleByPage(page model.ArticlePage) (articles []model.Article, err 
 		Joins("left join type on article.type_id = type.id").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
-		Offset((page.PageNum-1)*page.PageSize).Limit(page.PageSize).
-		//是否删除、推荐、发布在结构体中会有默认值，因此不需要判断是否为空
-		Where("article.is_deleted = ? and article.is_recommend = ? and article.is_published = ?",
-			page.IsDeleted, page.IsRecommend, page.IsPublished).
+		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
 		//根据更新时间排序，如果更新时间为空则以创建时间为准
 		Order("ifnull( article.updated_at, article.created_at ) desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
+	if page.IsDeleted != -1 {
+		query = query.Where("article.is_deleted = ?", page.IsDeleted)
+	}
+	if page.IsRecommend != -1 {
+		query = query.Where("article.is_recommend = ?", page.IsRecommend)
+	}
+	if page.IsPublished != -1 {
+		query = query.Where("article.is_published = ?", page.IsPublished)
+	}
 	if page.Title != "" {
 		query = query.Where("title like ?", "%"+page.Title+"%")
 	}

@@ -35,7 +35,7 @@ func (w *UserController) Register(ctx *gin.Context) {
 		return
 	}
 	//邮箱格式验证(当邮箱长度不为0时进行格式验证)
-	if len(email) != 0 && !util.EmailRegexp(email) {
+	if len(email) != 0 && !util.StringRegexp(util.RegexpExpressionEmail, email) {
 		util.ParameterError(ctx, util.GetCodeMsg(util.ErrorIllegalInput), nil)
 		return
 	}
@@ -72,7 +72,7 @@ func (w *UserController) Login(ctx *gin.Context) {
 
 	user, err := dao.SelectUserInfoByUsername(requestUser.Username)
 
-	// 没有数据库的用下面这个方法：这里先写死账号和密码  有数据库的要从数据库中获取
+	//判断用户名密码是否正确
 	if requestUser.Password != user.Password {
 		ctx.JSON(http.StatusOK, gin.H{
 			// 登录失败返回code 1001

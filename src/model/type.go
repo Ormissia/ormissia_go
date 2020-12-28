@@ -10,7 +10,7 @@ import "gorm.io/gorm"
 type Type struct {
 	Article []Article `json:"article" gorm:"-"` //类型下的文章
 	gorm.Model
-	TypeName string `json:"type_name" gorm:"type:varchar(100);not null"` //类型名字
+	TypeName string `json:"typeName" gorm:"type:varchar(100);not null"` //类型名字
 }
 
 //分页查询的属性

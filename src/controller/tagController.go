@@ -1,7 +1,7 @@
-// @File: articleController
-// @Date: 2020/12/6 20:51
+// @File: tagController
+// @Date: 2020/12/23 10:00
 // @Author: 安红豆
-// @Description: 文章的控制层
+// @Description: 标签的控制层
 package controller
 
 import (
@@ -11,26 +11,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type ArticleController struct {
+type TagController struct {
 }
 
 //保存文章（新增和修改）
-func (w *ArticleController) SaveArticle(ctx *gin.Context) {
-	article := model.Article{}
+func (w *TagController) SaveTag(ctx *gin.Context) {
+	articleTag := model.Tag{}
 	//从请求中获取参数
-	err := ctx.Bind(&article)
+	err := ctx.Bind(&articleTag)
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)
 		return
 	}
 
 	//执行插入或修改操作
-	if article.ID == 0 {
+	if articleTag.ID == 0 {
 		//当id等于0时为新增操作
-		err = dao.InsertArticle(article)
+		err = dao.InsertTag(articleTag)
 	} else {
 		//当id不等0时为修改操作
-		err = dao.UpdateArticle(article)
+		err = dao.UpdateTag(articleTag)
 	}
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)
@@ -40,48 +40,48 @@ func (w *ArticleController) SaveArticle(ctx *gin.Context) {
 }
 
 //删除文章
-func (w *ArticleController) DeleteArticle(ctx *gin.Context) {
+func (w *TagController) DeleteTag(ctx *gin.Context) {
 
 }
 
 //根据id查询文章
-func (w *ArticleController) SelectArticleById(ctx *gin.Context) {
+func (w *TagController) SelectTagById(ctx *gin.Context) {
 	//从请求中获取要查询的文章id
-	articleId := ctx.Query("id")
-	article, err := dao.SelectArticleById(articleId)
+	typeId := ctx.Query("id")
+	articleTag, err := dao.SelectTagById(typeId)
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)
 		return
 	}
-	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), article)
+	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), articleTag)
 	return
 }
 
 //根据分页参数查询文章
-func (w *ArticleController) SelectArticleByPage(ctx *gin.Context) {
-	page := model.ArticlePage{}
+func (w *TagController) SelectTagByPage(ctx *gin.Context) {
+	page := model.TagPage{}
 	//从请求中获取参数
 	err := ctx.Bind(&page)
 	if err != nil {
 		util.ParameterError(ctx, err.Error(), nil)
 		return
 	}
-	//根据分页参数查询博客列表
-	articles, err := dao.SelectArticleByPage(page)
+	//根据分页参数查询类型列表
+	articleTags, err := dao.SelectTagByPage(page)
 	if err != nil {
 		util.ParameterError(ctx, err.Error(), nil)
 		return
 	}
 	//根据分页参数查询博客总数
-	total, err := dao.CountArticleByPage(page)
+	count, err := dao.CountTagByPage(page)
 	if err != nil {
 		util.ParameterError(ctx, err.Error(), nil)
 		return
 	}
 	//返回成功
 	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), map[string]interface{}{
-		"total":    total,
-		"articles": articles,
+		"count":    count,
+		"articles": articleTags,
 	})
 	return
 }

@@ -12,7 +12,7 @@ import (
 
 func ArticleRouter(e *gin.Engine) {
 	articleController := &controller.ArticleController{}
-	//文章路由组
+	//路由组
 	private := e.Group("api/article")
 	//将登录验证的中间件注册到需要验证的路由
 	private.Use(middleware.Auth())

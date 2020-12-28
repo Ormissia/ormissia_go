@@ -32,6 +32,8 @@ func collectRoutes(r *gin.Engine) *gin.Engine {
 	UserRouter(r)
 	ArticleRouter(r)
 	FileRouter(r)
+	TypeRouter(r)
+	TagRouter(r)
 
 	return r
 }

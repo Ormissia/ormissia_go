@@ -41,7 +41,7 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
 		//根据更新时间排序，如果更新时间为空则以创建时间为准
-		Order("ifnull( article.updated_at, article.created_at ) desc")
+		Order("ifnull( type.updated_at, type.created_at ) desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.TypeName != "" {
@@ -57,7 +57,7 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 func CountTypeByPage(page model.TypePage) (count int, err error) {
 	//查询文章列表
 	query := database.DB.
-		Select("article.id").Table("article")
+		Select("type.id").Table("type")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.TypeName != "" {
