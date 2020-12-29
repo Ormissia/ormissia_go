@@ -81,7 +81,7 @@ func (w *TagController) SelectTagByPage(ctx *gin.Context) {
 	//返回成功
 	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), map[string]interface{}{
 		"count":    count,
-		"articles": articleTags,
+		"dataList": articleTags,
 	})
 	return
 }

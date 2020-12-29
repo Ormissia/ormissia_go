@@ -17,7 +17,7 @@ import (
 func Auth() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		//获取Authorization Header
-		tokenStr := ctx.GetHeader("Authorization")
+		tokenStr := ctx.GetHeader("token")
 
 		//判断是否有token
 		if tokenStr == "" || !strings.HasPrefix(tokenStr, "Bearer ") {

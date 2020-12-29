@@ -13,10 +13,14 @@ import (
 func TypeRouter(e *gin.Engine) {
 	typeController := &controller.TypeController{}
 	//路由组
-	private := e.Group("api/file")
+	private := e.Group("api/type")
 	//将登录验证的中间件注册到需要验证的路由
 	private.Use(middleware.Auth())
 	{
 		private.POST("/saveType", typeController.SaveType)
+	}
+	public := e.Group("api/type")
+	{
+		public.POST("/selectTypeByPage", typeController.SelectTypeByPage)
 	}
 }

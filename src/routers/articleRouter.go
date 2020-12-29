@@ -22,7 +22,7 @@ func ArticleRouter(e *gin.Engine) {
 	}
 	public := e.Group("api/article")
 	{
-		public.GET("/selectArticleById", articleController.SelectArticleById)
+		public.POST("/selectArticleById", articleController.SelectArticleById)
 		public.POST("/selectArticleByPage", articleController.SelectArticleByPage)
 	}
 }

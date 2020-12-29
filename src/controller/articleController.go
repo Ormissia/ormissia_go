@@ -5,6 +5,7 @@
 package controller
 
 import (
+	"github.com/Ormissia/ormissia_go/src/common"
 	"github.com/Ormissia/ormissia_go/src/dao"
 	"github.com/Ormissia/ormissia_go/src/model"
 	"github.com/Ormissia/ormissia_go/src/util"
@@ -27,6 +28,14 @@ func (w *ArticleController) SaveArticle(ctx *gin.Context) {
 	//执行插入或修改操作
 	if article.ID == 0 {
 		//当id等于0时为新增操作
+		//新增时需要插入userId
+		//获取Authorization Header
+		tokenStr := ctx.GetHeader("token")[7:]
+		//验证token格式是否合法
+		_, claims, _ := common.ParseToken(tokenStr)
+		//验证userId是否存在
+		user, _ := dao.SelectUserInfoByUsername(claims.Username)
+		article.UserId = user.ID
 		err = dao.InsertArticle(article)
 	} else {
 		//当id不等0时为修改操作
@@ -47,7 +56,8 @@ func (w *ArticleController) DeleteArticle(ctx *gin.Context) {
 //根据id查询文章
 func (w *ArticleController) SelectArticleById(ctx *gin.Context) {
 	//从请求中获取要查询的文章id
-	articleId := ctx.Query("id")
+	//articleId := ctx.Query("articleId")
+	articleId := ctx.PostForm("articleId")
 	article, err := dao.SelectArticleById(articleId)
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)

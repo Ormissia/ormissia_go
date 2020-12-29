@@ -35,7 +35,7 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 	//查询文章列表
 	query := database.DB.
 		Select("id", "created_at", "updated_at",
-			"deleted_at", "name").
+			"deleted_at", "type_name").
 		Table("type").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量

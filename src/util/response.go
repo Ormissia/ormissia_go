@@ -12,7 +12,7 @@ import (
 //统一封装返回结果
 func Response(ctx *gin.Context, httpState int, code int, msg string, data interface{}, token string) {
 	ctx.JSON(httpState, gin.H{
-		"code:": code,
+		"code":  code,
 		"msg":   msg,
 		"data":  data,
 		"token": token,

@@ -35,7 +35,7 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 	//查询文章列表
 	query := database.DB.
 		Select("id", "created_at", "updated_at",
-			"deleted_at", "name").
+			"deleted_at", "tag_name").
 		Table("tag").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
@@ -57,7 +57,7 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 func CountTagByPage(page model.TagPage) (count int, err error) {
 	//查询文章列表
 	query := database.DB.
-		Select("article.id").Table("article")
+		Select("tag.id").Table("tag")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.TagName != "" {

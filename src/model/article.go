@@ -14,16 +14,16 @@ type Article struct {
 	Type Type  `json:"type" gorm:"one2one:type;foreignKey:type_id;references:id"` //类型
 	Tags []Tag `json:"tags" gorm:"many2many:article_tag;foreignKey:id"`           //标签
 	gorm.Model
-	UserId      string `json:"userId" gorm:"type:varchar(100);not null"` //博客所属用户id
-	TypeId      string `json:"typeId" gorm:"type:varchar(100)"`          //类型
-	TopImage    string `json:"topImage" gorm:"type:varchar(100)"`        //首图
-	Title       string `json:"title" gorm:"type:varchar(100)"`           //标题
-	Description string `json:"description" gorm:"type:varchar(100)"`     //描述
-	Content     string `json:"content" gorm:"type:longtext"`             //内容
-	Visits      int    `json:"visits" gorm:"type:int"`                   //访客数量
-	IsDeleted   int    `json:"isDeleted" gorm:"int"`                     //是否删除（0正常、1删除）
-	IsRecommend int    `json:"isRecommend" gorm:"int"`                   //是否推荐（0普通、1推荐）
-	IsPublished int    `json:"isPublished" gorm:"int"`                   //是否发布（0草稿、1发布）
+	UserId      uint   `json:"userId" gorm:"type:int;not null"`      //博客所属用户id
+	TypeId      uint   `json:"typeId" gorm:"type:int"`               //类型
+	TopImage    string `json:"topImage" gorm:"type:varchar(100)"`    //首图
+	Title       string `json:"title" gorm:"type:varchar(100)"`       //标题
+	Description string `json:"description" gorm:"type:varchar(100)"` //描述
+	Content     string `json:"content" gorm:"type:longtext"`         //内容
+	Visits      int    `json:"visits" gorm:"type:int"`               //访客数量
+	IsDeleted   int    `json:"isDeleted" gorm:"int"`                 //是否删除（0正常、1删除）
+	IsRecommend int    `json:"isRecommend" gorm:"int"`               //是否推荐（0普通、1推荐）
+	IsPublished int    `json:"isPublished" gorm:"int"`               //是否发布（0草稿、1发布）
 }
 
 //分页查询的属性
