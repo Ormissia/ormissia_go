@@ -77,12 +77,18 @@ func CountArticleByPage(page model.ArticlePage) (count int, err error) {
 		Select("article.id").Table("article").
 		//连接用户表和类型标签表
 		Joins("left join user on article.user_id = user.id").
-		Joins("left join type on article.type_id = type.id").
-		//是否删除、推荐、发布在结构体中会有默认值，因此不需要判断是否为空
-		Where("article.is_deleted = ? and article.is_recommend = ? and article.is_published = ?",
-			page.IsDeleted, page.IsRecommend, page.IsPublished)
+		Joins("left join type on article.type_id = type.id")
 
 	//动态拼接查询参数需要判空的动态查询参数
+	if page.IsDeleted != -1 {
+		query = query.Where("article.is_deleted = ?", page.IsDeleted)
+	}
+	if page.IsRecommend != -1 {
+		query = query.Where("article.is_recommend = ?", page.IsRecommend)
+	}
+	if page.IsPublished != -1 {
+		query = query.Where("article.is_published = ?", page.IsPublished)
+	}
 	if page.Title != "" {
 		query = query.Where("title like ?", "%"+page.Title+"%")
 	}
