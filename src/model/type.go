@@ -8,7 +8,7 @@ import "gorm.io/gorm"
 
 //类型属性
 type Type struct {
-	Article []Article `json:"article" gorm:"-"` //类型下的文章
+	Articles []Article `json:"articles" gorm:"-"` //类型下的文章
 	gorm.Model
 	TypeName string `json:"typeName" gorm:"type:varchar(100);not null"` //类型名字
 }

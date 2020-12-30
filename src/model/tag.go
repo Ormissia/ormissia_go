@@ -8,7 +8,7 @@ import "gorm.io/gorm"
 
 //标签属性
 type Tag struct {
-	Article []Article `json:"article" gorm:"-"` //标签下的文章
+	Articles []Article `json:"articles" gorm:"many2many:article_tag;foreignKey:id"` //标签下的文章
 	gorm.Model
 	TagName string `json:"tagName" gorm:"type:varchar(100);not null"` //标签名字
 }

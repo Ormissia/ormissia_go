@@ -23,7 +23,11 @@ func SelectArticleById(id string) (article *model.Article, err error) {
 	//赋值给article
 	article = &model.Article{}
 	//查询文章信息
-	err = database.DB.Table("article").Where("id = ?", id).First(&article).Error
+	err = database.DB.Table("article").
+		Preload("User").
+		Preload("Type").
+		Preload("Tags").
+		Where("id = ?", id).First(&article).Error
 	if err != nil {
 		return nil, err
 	}
@@ -35,14 +39,14 @@ func SelectArticleByPage(page model.ArticlePage) (articles []model.Article, err 
 	//查询文章列表
 	query := database.DB.
 		//指定查询字段(主要是为了排除content字段)
-		// TODO 嵌套结构体的查询
 		Select("article.id", "article.created_at", "article.updated_at",
-			"article.deleted_at", "user_id", "type_id", "type_name", "top_image", "title",
+			"article.deleted_at", "user_id", "type_id", "top_image", "title",
 			"description", "visits", "is_deleted", "is_recommend", "is_published").
 		Table("article").
 		//连接用户表和类型标签表
-		Joins("left join user on article.user_id = user.id").
-		Joins("left join type on article.type_id = type.id").
+		Preload("User").
+		Preload("Type").
+		Preload("Tags").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
@@ -73,11 +77,7 @@ func CountArticleByPage(page model.ArticlePage) (count int, err error) {
 	//查询文章列表
 	query := database.DB.
 		//指定查询字段(主要是为了排除content字段)
-		// TODO 嵌套结构体的查询
-		Select("article.id").Table("article").
-		//连接用户表和类型标签表
-		Joins("left join user on article.user_id = user.id").
-		Joins("left join type on article.type_id = type.id")
+		Select("article.id").Table("article")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.IsDeleted != -1 {

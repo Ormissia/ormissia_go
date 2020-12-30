@@ -57,7 +57,7 @@ func (w *TagController) SelectTagById(ctx *gin.Context) {
 	return
 }
 
-//根据分页参数查询文章
+//根据分页参数查询标签
 func (w *TagController) SelectTagByPage(ctx *gin.Context) {
 	page := model.TagPage{}
 	//从请求中获取参数

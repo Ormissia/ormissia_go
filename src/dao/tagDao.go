@@ -37,11 +37,12 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 		Select("id", "created_at", "updated_at",
 			"deleted_at", "tag_name").
 		Table("tag").
+		Preload("Articles").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
 		//根据更新时间排序，如果更新时间为空则以创建时间为准
-		Order("ifnull( tag.updated_at, tag.created_at ) desc")
+		Order("tag_name desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.TagName != "" {

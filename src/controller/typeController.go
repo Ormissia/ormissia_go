@@ -57,7 +57,7 @@ func (w *TypeController) SelectTypeById(ctx *gin.Context) {
 	return
 }
 
-//根据分页参数查询文章
+//根据分页参数查询类型
 func (w *TypeController) SelectTypeByPage(ctx *gin.Context) {
 	page := model.TypePage{}
 	//从请求中获取参数
