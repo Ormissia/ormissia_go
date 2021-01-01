@@ -43,7 +43,6 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
-		//TODO 排序方式需要修改
 		//根据标签下文章数量排序，文章数量相同时按照名称排序
 		Order("articles desc, tag_name desc")
 
