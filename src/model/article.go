@@ -21,9 +21,13 @@ type Article struct {
 	Description string `json:"description" gorm:"type:varchar(100)"` //描述
 	Content     string `json:"content" gorm:"type:longtext"`         //内容
 	Visits      int    `json:"visits" gorm:"type:int"`               //访客数量
-	IsDeleted   int    `json:"isDeleted" gorm:"int"`                 //是否删除（0正常、1删除）
-	IsRecommend int    `json:"isRecommend" gorm:"int"`               //是否推荐（0普通、1推荐）
-	IsPublished int    `json:"isPublished" gorm:"int"`               //是否发布（0草稿、1发布）
+	//因为Golang中bool类型默认为false，当一个实体类中有多个bool类型的值需要更新时，无法判断前端没有传值还是是前端传的false，并且每次修改都要求前端传所有bool类型的属性显然也不合理
+	//所以采用int类型的变量来表示这些属性的不同状态
+	//而在Golang中int类型的默认值为0，因此属性为0值时也无法判断是前端没有传值还是传的0值
+	//故，这些属性的状态标识应该从1开始，0表示为空（即前端未传值），1表示true，2表示false
+	IsDeleted   int `json:"isDeleted" gorm:"int"`   //是否删除（1删除、2正常）
+	IsRecommend int `json:"isRecommend" gorm:"int"` //是否推荐（1推荐、2普通）
+	IsPublished int `json:"isPublished" gorm:"int"` //是否发布（1发布、2草稿）
 }
 
 //分页查询的属性

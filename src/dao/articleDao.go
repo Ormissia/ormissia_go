@@ -55,13 +55,13 @@ func SelectArticleByPage(page model.ArticlePage) (articles []model.Article, err 
 		Order("ifnull( article.updated_at, article.created_at ) desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
-	if page.IsDeleted != -1 {
+	if page.IsDeleted != 0 {
 		query = query.Where("article.is_deleted = ?", page.IsDeleted)
 	}
-	if page.IsRecommend != -1 {
+	if page.IsRecommend != 0 {
 		query = query.Where("article.is_recommend = ?", page.IsRecommend)
 	}
-	if page.IsPublished != -1 {
+	if page.IsPublished != 0 {
 		query = query.Where("article.is_published = ?", page.IsPublished)
 	}
 	if page.Title != "" {
@@ -74,20 +74,20 @@ func SelectArticleByPage(page model.ArticlePage) (articles []model.Article, err 
 }
 
 //根据分页参数查询文章总数
-func CountArticleByPage(page model.ArticlePage) (count int, err error) {
+func CountArticleByPage(page model.ArticlePage) (total int, err error) {
 	//查询文章列表
 	query := database.DB.
 		//指定查询字段(主要是为了排除content字段)
 		Select("article.id").Table("article")
 
 	//动态拼接查询参数需要判空的动态查询参数
-	if page.IsDeleted != -1 {
+	if page.IsDeleted != 0 {
 		query = query.Where("article.is_deleted = ?", page.IsDeleted)
 	}
-	if page.IsRecommend != -1 {
+	if page.IsRecommend != 0 {
 		query = query.Where("article.is_recommend = ?", page.IsRecommend)
 	}
-	if page.IsPublished != -1 {
+	if page.IsPublished != 0 {
 		query = query.Where("article.is_published = ?", page.IsPublished)
 	}
 	if page.Title != "" {
@@ -96,7 +96,7 @@ func CountArticleByPage(page model.ArticlePage) (count int, err error) {
 	var articles []model.Article
 	//执行查询操作
 	err = query.Find(&articles).Error
-	count = int(query.RowsAffected)
+	total = int(query.RowsAffected)
 	return
 }
 

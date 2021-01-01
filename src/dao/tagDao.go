@@ -35,7 +35,7 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 	//查询文章列表
 	query := database.DB.
 		Select("id", "created_at", "updated_at",
-			"deleted_at", "tag_name", "count(id) as articles").
+			"deleted_at", "tag_name", "count(article_id) as articles").
 		Table("tag").
 		Preload("Articles").
 		Joins("left join article_tag on tag.id = article_tag.tag_id").
@@ -57,7 +57,7 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 }
 
 //根据分页参数查询文章总数
-func CountTagByPage(page model.TagPage) (count int, err error) {
+func CountTagByPage(page model.TagPage) (total int, err error) {
 	//查询文章列表
 	query := database.DB.
 		Select("tag.id").Table("tag")
@@ -69,7 +69,7 @@ func CountTagByPage(page model.TagPage) (count int, err error) {
 	var articleTags []model.Tag
 	//执行查询操作
 	err = query.Find(&articleTags).Error
-	count = int(query.RowsAffected)
+	total = int(query.RowsAffected)
 	return
 }
 

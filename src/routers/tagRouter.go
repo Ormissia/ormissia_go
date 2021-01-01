@@ -17,7 +17,7 @@ func TagRouter(e *gin.Engine) {
 	//将登录验证的中间件注册到需要验证的路由
 	private.Use(middleware.Auth())
 	{
-		private.POST("/addTag", tagController.SaveTag)
+		private.POST("/saveTag", tagController.SaveTag)
 	}
 	public := e.Group("api/tag")
 	{

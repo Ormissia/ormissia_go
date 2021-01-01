@@ -73,14 +73,14 @@ func (w *TypeController) SelectTypeByPage(ctx *gin.Context) {
 		return
 	}
 	//根据分页参数查询博客总数
-	count, err := dao.CountTypeByPage(page)
+	total, err := dao.CountTypeByPage(page)
 	if err != nil {
 		util.ParameterError(ctx, err.Error(), nil)
 		return
 	}
 	//返回成功
 	util.Success(ctx, util.GetCodeMsg(util.HttpSuccess), map[string]interface{}{
-		"count":    count,
+		"total":    total,
 		"dataList": articleTypes,
 	})
 	return

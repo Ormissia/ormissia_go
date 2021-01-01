@@ -34,10 +34,11 @@ func SelectTypeById(id string) (articleType *model.Type, err error) {
 func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error) {
 	//查询文章列表
 	query := database.DB.
-		Select("id", "created_at", "updated_at",
-			"deleted_at", "type_name", "count(id) as articles").
+		Select("type.id", "type.created_at", "type.updated_at",
+			"type.deleted_at", "type_name", "count(article.id) as articles").
 		Table("type").
-		Joins("left join type on type.id = article.type_id").
+		Preload("Articles").
+		Joins("left join article on type.id = article.type_id").
 		Group("id").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
@@ -56,7 +57,7 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 }
 
 //根据分页参数查询文章总数
-func CountTypeByPage(page model.TypePage) (count int, err error) {
+func CountTypeByPage(page model.TypePage) (total int, err error) {
 	//查询文章列表
 	query := database.DB.
 		Select("type.id").Table("type")
@@ -68,7 +69,7 @@ func CountTypeByPage(page model.TypePage) (count int, err error) {
 	var articleTypes []model.Type
 	//执行查询操作
 	err = query.Find(&articleTypes).Error
-	count = int(query.RowsAffected)
+	total = int(query.RowsAffected)
 	return
 }
 
