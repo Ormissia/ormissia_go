@@ -35,14 +35,17 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 	//查询文章列表
 	query := database.DB.
 		Select("id", "created_at", "updated_at",
-			"deleted_at", "tag_name").
+			"deleted_at", "tag_name", "count(id) as articles").
 		Table("tag").
 		Preload("Articles").
+		Joins("left join article_tag on tag.id = article_tag.tag_id").
+		Group("id").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
-		//根据更新时间排序，如果更新时间为空则以创建时间为准
-		Order("tag_name desc")
+		//TODO 排序方式需要修改
+		//根据标签下文章数量排序，文章数量相同时按照名称排序
+		Order("articles desc, tag_name desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.TagName != "" {

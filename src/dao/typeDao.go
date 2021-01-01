@@ -35,13 +35,15 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 	//查询文章列表
 	query := database.DB.
 		Select("id", "created_at", "updated_at",
-			"deleted_at", "type_name").
+			"deleted_at", "type_name", "count(id) as articles").
 		Table("type").
+		Joins("left join type on type.id = article.type_id").
+		Group("id").
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
-		//根据更新时间排序，如果更新时间为空则以创建时间为准
-		Order("ifnull( type.updated_at, type.created_at ) desc")
+		//根据类型下文章数量排序，文章数量相同时按照名称排序
+		Order("articles desc, type_name desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.TypeName != "" {

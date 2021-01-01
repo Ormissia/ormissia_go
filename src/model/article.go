@@ -1,7 +1,7 @@
 // @File: blog
 // @Date: 2020/12/6 20:54
 // @Author: 安红豆
-// @Description: 博客
+// @Description: 文章
 package model
 
 import (
