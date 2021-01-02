@@ -30,9 +30,9 @@ func SelectTagById(id string) (articleTag *model.Tag, err error) {
 	return
 }
 
-//根据分页参数查询文章列表
+//根据分页参数查询标签列表
 func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
-	//查询文章列表
+	//查询标签列表
 	query := database.DB.
 		Select("id", "created_at", "updated_at",
 			"deleted_at", "tag_name", "count(article_id) as articles").
@@ -47,6 +47,9 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 		Order("articles desc, tag_name desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
+	if page.IsDeleted != 0 {
+		query = query.Where("is_deleted = ?", page.IsDeleted)
+	}
 	if page.TagName != "" {
 		query = query.Where("name like ?", "%"+page.TagName+"%")
 	}
@@ -63,6 +66,9 @@ func CountTagByPage(page model.TagPage) (total int, err error) {
 		Select("tag.id").Table("tag")
 
 	//动态拼接查询参数需要判空的动态查询参数
+	if page.IsDeleted != 0 {
+		query = query.Where("is_deleted = ?", page.IsDeleted)
+	}
 	if page.TagName != "" {
 		query = query.Where("title like ?", "%"+page.TagName+"%")
 	}

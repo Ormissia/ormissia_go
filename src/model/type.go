@@ -10,7 +10,8 @@ import "gorm.io/gorm"
 type Type struct {
 	Articles []Article `json:"articles" gorm:"one2many:article;foreignKey:TypeId"` //类型下的文章
 	gorm.Model
-	TypeName string `json:"typeName" gorm:"type:varchar(100);not null"` //类型名字
+	TypeName  string `json:"typeName" gorm:"type:varchar(100);not null"` //类型名字
+	IsDeleted int    `json:"isDeleted" gorm:"int"`                       //是否删除（1删除、2正常）
 }
 
 //分页查询的属性

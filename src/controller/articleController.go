@@ -48,11 +48,11 @@ func (w *ArticleController) SaveArticle(ctx *gin.Context) {
 	util.Success(ctx, "保存成功", nil)
 }
 
-//删除文章
+//删除文章（删除功能为逻辑删除，暂时与修改共用同一个接口）
 func (w *ArticleController) DeleteArticle(ctx *gin.Context) {
-
 }
 
+//TODO 查询功能需要添加userId的条件
 //根据id查询文章
 func (w *ArticleController) SelectArticleById(ctx *gin.Context) {
 	//从请求中获取要查询的文章id

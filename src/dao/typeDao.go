@@ -30,9 +30,9 @@ func SelectTypeById(id string) (articleType *model.Type, err error) {
 	return
 }
 
-//根据分页参数查询文章列表
+//根据分页参数查询类型列表
 func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error) {
-	//查询文章列表
+	//查询类型列表
 	query := database.DB.
 		Select("type.id", "type.created_at", "type.updated_at",
 			"type.deleted_at", "type_name", "count(article.id) as articles").
@@ -47,6 +47,9 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 		Order("articles desc, type_name desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
+	if page.IsDeleted != 0 {
+		query = query.Where("type.is_deleted = ?", page.IsDeleted)
+	}
 	if page.TypeName != "" {
 		query = query.Where("name like ?", "%"+page.TypeName+"%")
 	}
@@ -63,6 +66,9 @@ func CountTypeByPage(page model.TypePage) (total int, err error) {
 		Select("type.id").Table("type")
 
 	//动态拼接查询参数需要判空的动态查询参数
+	if page.IsDeleted != 0 {
+		query = query.Where("is_deleted = ?", page.IsDeleted)
+	}
 	if page.TypeName != "" {
 		query = query.Where("title like ?", "%"+page.TypeName+"%")
 	}

@@ -10,7 +10,8 @@ import "gorm.io/gorm"
 type Tag struct {
 	Articles []Article `json:"articles" gorm:"many2many:article_tag;foreignKey:id"` //标签下的文章
 	gorm.Model
-	TagName string `json:"tagName" gorm:"type:varchar(100);not null"` //标签名字
+	TagName   string `json:"tagName" gorm:"type:varchar(100);not null"` //标签名字
+	IsDeleted int    `json:"isDeleted" gorm:"int"`                      //是否删除（1删除、2正常）
 }
 
 //分页查询的属性

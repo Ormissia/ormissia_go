@@ -27,6 +27,8 @@ func (w *TagController) SaveTag(ctx *gin.Context) {
 	//执行插入或修改操作
 	if articleTag.ID == 0 {
 		//当id等于0时为新增操作
+		//新增时将删除标记设为2，即为未删除
+		articleTag.IsDeleted = 2
 		err = dao.InsertTag(articleTag)
 	} else {
 		//当id不等0时为修改操作
@@ -39,7 +41,7 @@ func (w *TagController) SaveTag(ctx *gin.Context) {
 	util.Success(ctx, "保存成功", nil)
 }
 
-//删除文章
+//删除标签
 func (w *TagController) DeleteTag(ctx *gin.Context) {
 
 }
