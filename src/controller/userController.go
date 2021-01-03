@@ -73,7 +73,7 @@ func (w *UserController) Login(ctx *gin.Context) {
 	user, err := dao.SelectUserInfoByUsername(requestUser.Username)
 
 	//判断用户名密码是否正确
-	if requestUser.Password != user.Password {
+	if util.StringConvertMD5(requestUser.Password) != user.Password {
 		ctx.JSON(http.StatusOK, gin.H{
 			// 登录失败返回code 1001
 			"code":    util.ErrorPasswordWrong,
