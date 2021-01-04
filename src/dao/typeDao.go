@@ -51,7 +51,7 @@ func SelectTypeByPage(page model.TypePage) (articleTypes []model.Type, err error
 		query = query.Where("type.is_deleted = ?", page.IsDeleted)
 	}
 	if page.TypeName != "" {
-		query = query.Where("name like ?", "%"+page.TypeName+"%")
+		query = query.Where("type_name like ?", "%"+page.TypeName+"%")
 	}
 
 	//执行查询操作
@@ -70,7 +70,7 @@ func CountTypeByPage(page model.TypePage) (total int, err error) {
 		query = query.Where("is_deleted = ?", page.IsDeleted)
 	}
 	if page.TypeName != "" {
-		query = query.Where("title like ?", "%"+page.TypeName+"%")
+		query = query.Where("type_name like ?", "%"+page.TypeName+"%")
 	}
 	var articleTypes []model.Type
 	//执行查询操作

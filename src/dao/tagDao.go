@@ -51,7 +51,7 @@ func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 		query = query.Where("is_deleted = ?", page.IsDeleted)
 	}
 	if page.TagName != "" {
-		query = query.Where("name like ?", "%"+page.TagName+"%")
+		query = query.Where("tag_name like ?", "%"+page.TagName+"%")
 	}
 
 	//执行查询操作
@@ -70,7 +70,7 @@ func CountTagByPage(page model.TagPage) (total int, err error) {
 		query = query.Where("is_deleted = ?", page.IsDeleted)
 	}
 	if page.TagName != "" {
-		query = query.Where("title like ?", "%"+page.TagName+"%")
+		query = query.Where("tag_name like ?", "%"+page.TagName+"%")
 	}
 	var articleTags []model.Tag
 	//执行查询操作

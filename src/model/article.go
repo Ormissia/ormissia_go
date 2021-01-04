@@ -18,7 +18,7 @@ type Article struct {
 	TypeId      uint   `json:"typeId" gorm:"type:int"`               //类型
 	TopImage    string `json:"topImage" gorm:"type:varchar(100)"`    //首图
 	Title       string `json:"title" gorm:"type:varchar(100)"`       //标题
-	Description string `json:"description" gorm:"type:varchar(100)"` //描述
+	Description string `json:"description" gorm:"type:varchar(255)"` //描述
 	Content     string `json:"content" gorm:"type:longtext"`         //内容
 	Visits      int    `json:"visits" gorm:"type:int"`               //访客数量
 	//因为Golang中bool类型默认为false，当一个实体类中有多个bool类型的值需要更新时，无法判断前端没有传值还是是前端传的false，并且每次修改都要求前端传所有bool类型的属性显然也不合理
