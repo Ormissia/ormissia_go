@@ -16,7 +16,7 @@ type Article struct {
 	gorm.Model
 	UserId      uint   `json:"userId" gorm:"type:int;not null"`      //博客所属用户id
 	TypeId      uint   `json:"typeId" gorm:"type:int"`               //类型
-	TopImage    string `json:"topImage" gorm:"type:varchar(100)"`    //首图
+	TopImage    string `json:"topImage" gorm:"type:varchar(255)"`    //首图
 	Title       string `json:"title" gorm:"type:varchar(100)"`       //标题
 	Description string `json:"description" gorm:"type:varchar(255)"` //描述
 	Content     string `json:"content" gorm:"type:longtext"`         //内容
