@@ -5,8 +5,8 @@
 package dao
 
 import (
-	"github.com/Ormissia/ormissia_go/database"
-	"github.com/Ormissia/ormissia_go/model"
+	"github.com/ormissia/go-gin-blog/database"
+	"github.com/ormissia/go-gin-blog/model"
 )
 
 //增

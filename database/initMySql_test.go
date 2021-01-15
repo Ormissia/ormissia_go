@@ -6,8 +6,8 @@ package database
 
 import (
 	"fmt"
-	"github.com/Ormissia/ormissia_go/common"
-	"github.com/Ormissia/ormissia_go/util"
+	"github.com/ormissia/go-gin-blog/common"
+	"github.com/ormissia/go-gin-blog/util"
 	"testing"
 )
 

@@ -5,8 +5,8 @@
 package routers
 
 import (
-	"github.com/Ormissia/ormissia_go/controller"
 	"github.com/gin-gonic/gin"
+	"github.com/ormissia/go-gin-blog/controller"
 )
 
 //登录路由

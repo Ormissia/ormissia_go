@@ -5,9 +5,9 @@
 package routers
 
 import (
-	"github.com/Ormissia/ormissia_go/middleware"
-	"github.com/Ormissia/ormissia_go/util"
 	"github.com/gin-gonic/gin"
+	"github.com/ormissia/go-gin-blog/middleware"
+	"github.com/ormissia/go-gin-blog/util"
 	"github.com/spf13/viper"
 )
 

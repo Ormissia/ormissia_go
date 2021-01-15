@@ -5,7 +5,7 @@
 package model
 
 import (
-	"github.com/Ormissia/ormissia_go/util"
+	"github.com/ormissia/go-gin-blog/util"
 	"gorm.io/gorm"
 )
 

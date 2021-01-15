@@ -6,7 +6,7 @@ package common
 
 import (
 	"fmt"
-	"github.com/Ormissia/ormissia_go/model"
+	"github.com/ormissia/go-gin-blog/model"
 	"testing"
 )
 

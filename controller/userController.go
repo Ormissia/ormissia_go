@@ -5,11 +5,11 @@
 package controller
 
 import (
-	"github.com/Ormissia/ormissia_go/common"
-	"github.com/Ormissia/ormissia_go/dao"
-	"github.com/Ormissia/ormissia_go/model"
-	"github.com/Ormissia/ormissia_go/util"
 	"github.com/gin-gonic/gin"
+	"github.com/ormissia/go-gin-blog/common"
+	"github.com/ormissia/go-gin-blog/dao"
+	"github.com/ormissia/go-gin-blog/model"
+	"github.com/ormissia/go-gin-blog/util"
 	"net/http"
 )
 

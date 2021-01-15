@@ -5,8 +5,8 @@
 package controller
 
 import (
-	"github.com/Ormissia/ormissia_go/util"
 	"github.com/gin-gonic/gin"
+	"github.com/ormissia/go-gin-blog/util"
 	"github.com/spf13/viper"
 	"time"
 )

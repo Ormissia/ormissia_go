@@ -5,7 +5,7 @@
 package common
 
 import (
-	"github.com/Ormissia/ormissia_go/util"
+	"github.com/ormissia/go-gin-blog/util"
 	"github.com/spf13/viper"
 	"testing"
 )

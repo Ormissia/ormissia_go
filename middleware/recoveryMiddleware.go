@@ -6,8 +6,8 @@ package middleware
 
 import (
 	"fmt"
-	"github.com/Ormissia/ormissia_go/util"
 	"github.com/gin-gonic/gin"
+	"github.com/ormissia/go-gin-blog/util"
 )
 
 func ServerError() gin.HandlerFunc {

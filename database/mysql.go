@@ -5,8 +5,8 @@
 package database
 
 import (
-	"github.com/Ormissia/ormissia_go/model"
-	"github.com/Ormissia/ormissia_go/util"
+	"github.com/ormissia/go-gin-blog/model"
+	"github.com/ormissia/go-gin-blog/util"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

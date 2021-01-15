@@ -5,8 +5,8 @@
 package common
 
 import (
-	"github.com/Ormissia/ormissia_go/model"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/ormissia/go-gin-blog/model"
 	"time"
 )
 

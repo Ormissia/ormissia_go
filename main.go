@@ -5,10 +5,10 @@
 package main
 
 import (
-	"github.com/Ormissia/ormissia_go/common"
-	"github.com/Ormissia/ormissia_go/database"
-	"github.com/Ormissia/ormissia_go/routers"
-	"github.com/Ormissia/ormissia_go/util"
+	"github.com/ormissia/go-gin-blog/common"
+	"github.com/ormissia/go-gin-blog/database"
+	"github.com/ormissia/go-gin-blog/routers"
+	"github.com/ormissia/go-gin-blog/util"
 )
 
 func main() {

@@ -5,9 +5,9 @@
 package routers
 
 import (
-	"github.com/Ormissia/ormissia_go/controller"
-	"github.com/Ormissia/ormissia_go/middleware"
 	"github.com/gin-gonic/gin"
+	"github.com/ormissia/go-gin-blog/controller"
+	"github.com/ormissia/go-gin-blog/middleware"
 )
 
 func TypeRouter(e *gin.Engine) {
