@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-//博客属性
+//文章属性
 type Article struct {
 	User User  `json:"user" gorm:"one2one:user;foreignKey:user_id;references:id"` //博客所属用户
 	Type Type  `json:"type" gorm:"one2one:type;foreignKey:type_id;references:id"` //类型

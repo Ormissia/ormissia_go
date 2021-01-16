@@ -47,12 +47,11 @@ func SelectArticleByPage(page model.ArticlePage) (articles []model.Article, err 
 		Preload("User").
 		Preload("Type").
 		Preload("Tags").
-		//TODO 创建10条以上数据，测试分页查询结果是否有问题
 		//分页参数是必传的
 		//Limit指定获取记录的最大数量,Offset指定在开始返回记录之前要跳过的记录数量
 		Offset((page.PageNum - 1) * page.PageSize).Limit(page.PageSize).
-		//根据更新时间排序，如果更新时间为空则以创建时间为准
-		Order("ifnull( article.updated_at, article.created_at ) desc")
+		//根据创建时间排序
+		Order("article.created_at desc")
 
 	//动态拼接查询参数需要判空的动态查询参数
 	if page.IsDeleted != 0 {
