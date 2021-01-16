@@ -5,16 +5,15 @@
 package main
 
 import (
-	"github.com/Ormissia/ormissia_go/src/common"
-	"github.com/Ormissia/ormissia_go/src/database"
-	"github.com/Ormissia/ormissia_go/src/routers"
-	"github.com/Ormissia/ormissia_go/src/util"
+	"github.com/ormissia/go-gin-blog/common"
+	"github.com/ormissia/go-gin-blog/database"
+	"github.com/ormissia/go-gin-blog/routers"
 )
 
 func main() {
 
-	//初始化配置文件
-	common.InitApplicationConfig(util.ConfigFilePath, util.ConfigFileName)
+	//初始化项目配置
+	common.InitApplicationConfig()
 	//初始化数据库
 	database.InitMySql()
 	//初始化路由并运行
