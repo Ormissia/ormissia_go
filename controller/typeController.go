@@ -46,7 +46,7 @@ func (w *TypeController) DeleteType(ctx *gin.Context) {
 
 }
 
-//根据id查询文章
+//根据id查询类型
 func (w *TypeController) SelectTypeById(ctx *gin.Context) {
 	//从请求中获取要查询的文章id
 	typeId := ctx.Query("id")
