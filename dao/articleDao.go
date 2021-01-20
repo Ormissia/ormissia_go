@@ -7,11 +7,12 @@ package dao
 import (
 	"github.com/ormissia/go-gin-blog/database"
 	"github.com/ormissia/go-gin-blog/model"
+	"gorm.io/gorm"
 )
 
 //增
 func InsertArticle(article model.Article) (err error) {
-	err = database.DB.Save(&article).Error
+	err = database.DB.Create(article).Error
 	return
 }
 
@@ -101,6 +102,25 @@ func CountArticleByPage(page model.ArticlePage) (total int, err error) {
 
 //改
 func UpdateArticle(article model.Article) (err error) {
-	err = database.DB.Omit("id", "created_at").Updates(&article).Error
+	err = database.DB.Transaction(func(tx *gorm.DB) error {
+		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
+		//更新多对多关系
+		if err := tx.Model(&article).Association("Tags").Replace(article.Tags); err != nil {
+			// 返回任何错误都会回滚事务
+			return err
+		}
+
+		//测试事务
+		/*a := 0
+		fmt.Println(1 / a)*/
+
+		//更新文章信息
+		if err := tx.Updates(&article).Error; err != nil {
+			return err
+		}
+
+		// 返回 nil 提交事务
+		return nil
+	})
 	return
 }

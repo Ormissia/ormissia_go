@@ -10,9 +10,12 @@ import (
 
 //文章属性
 type Article struct {
-	User User  `json:"user" gorm:"one2one:user;foreignKey:user_id;references:id"` //博客所属用户
-	Type Type  `json:"type" gorm:"one2one:type;foreignKey:type_id;references:id"` //类型
-	Tags []Tag `json:"tags" gorm:"many2many:article_tag;foreignKey:id"`           //标签
+	//博客所属用户
+	User User `json:"user" gorm:"one2one:user;foreignKey:user_id;references:id"`
+	//类型
+	Type Type `json:"type" gorm:"one2one:type;foreignKey:type_id;references:id"`
+	//标签
+	Tags []Tag `json:"tags" gorm:"many2many:article_tag;foreignKey:id;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	gorm.Model
 	UserId      uint   `json:"userId" gorm:"type:int;not null"`      //博客所属用户id
 	TypeId      uint   `json:"typeId" gorm:"type:int"`               //类型

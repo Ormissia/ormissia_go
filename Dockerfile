@@ -36,7 +36,7 @@ ENV SERVER_PORT=8085 \
     DATASOURCE_DATABASE=blog \
     DATASOURCE_USERNAME=root \
     DATASOURCE_PASSWORD=5KvA82*Ziq \
-    DATASOURCE_CHARSET=utf8
+    DATASOURCE_CHARSET=utf8mb4
 
 
 # 从builder镜像中把/dist/app 拷贝到当前目录

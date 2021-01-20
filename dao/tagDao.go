@@ -30,6 +30,8 @@ func SelectTagById(id string) (articleTag *model.Tag, err error) {
 	return
 }
 
+//TODO 重写查询全部标签的接口
+
 //根据分页参数查询标签列表
 func SelectTagByPage(page model.TagPage) (articleTags []model.Tag, err error) {
 	//查询标签列表
