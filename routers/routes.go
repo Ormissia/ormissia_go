@@ -15,7 +15,7 @@ import (
 func InitRouter() {
 	//注册路由
 	r := gin.Default()
-	r = collectRoutes(r)
+	collectRoutes(r)
 
 	//运行
 	port := viper.GetString(util.ConfigServerPort)
@@ -23,10 +23,13 @@ func InitRouter() {
 }
 
 //注册所有路由
-func collectRoutes(r *gin.Engine) *gin.Engine {
+func collectRoutes(r *gin.Engine) {
 
 	//将中间件注册到全局，对所有路由生效
-	r.Use(middleware.Cors(), middleware.ServerError())
+	r.Use(
+		middleware.Cors(),
+		middleware.ServerError(),
+	)
 
 	//注册路由
 	UserRouter(r)
@@ -34,6 +37,4 @@ func collectRoutes(r *gin.Engine) *gin.Engine {
 	FileRouter(r)
 	TypeRouter(r)
 	TagRouter(r)
-
-	return r
 }

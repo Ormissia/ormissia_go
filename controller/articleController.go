@@ -15,7 +15,6 @@ import (
 type ArticleController struct {
 }
 
-//TODO 文章标签关系修改BUG
 //保存文章（新增和修改）
 func (w *ArticleController) SaveArticle(ctx *gin.Context) {
 	article := model.Article{}
