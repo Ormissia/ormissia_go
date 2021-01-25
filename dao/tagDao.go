@@ -11,7 +11,7 @@ import (
 
 //增
 func InsertTag(articleTag model.Tag) (err error) {
-	err = database.DB.Save(&articleTag).Error
+	err = database.DB.Create(&articleTag).Error
 	return
 }
 

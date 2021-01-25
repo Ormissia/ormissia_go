@@ -14,7 +14,7 @@ import (
 type TypeController struct {
 }
 
-//保存文章（新增和修改）
+//保存类型（新增和修改）
 func (w *TypeController) SaveType(ctx *gin.Context) {
 	articleType := model.Type{}
 	//从请求中获取参数

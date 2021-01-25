@@ -12,7 +12,7 @@ import (
 
 //增
 func InsertArticle(article model.Article) (err error) {
-	err = database.DB.Create(article).Error
+	err = database.DB.Create(&article).Error
 	return
 }
 

@@ -11,7 +11,7 @@ import (
 
 //增
 func InsertType(articleType model.Type) (err error) {
-	err = database.DB.Save(&articleType).Error
+	err = database.DB.Create(&articleType).Error
 	return
 }
 

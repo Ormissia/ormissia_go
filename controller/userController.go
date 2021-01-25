@@ -16,6 +16,7 @@ import (
 type UserController struct {
 }
 
+//注册
 func (w *UserController) Register(ctx *gin.Context) {
 	requestUser := model.User{}
 	//从请求中获取用户参数

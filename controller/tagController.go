@@ -14,7 +14,7 @@ import (
 type TagController struct {
 }
 
-//保存文章（新增和修改）
+//保存标签（新增和修改）
 func (w *TagController) SaveTag(ctx *gin.Context) {
 	articleTag := model.Tag{}
 	//从请求中获取参数
