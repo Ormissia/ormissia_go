@@ -1,5 +1,5 @@
 # 我的博客后端项目（Go语言版）
-![](https://badgen.net/badge/github/Blog/blue?label=Golang) [![Go Reference](https://pkg.go.dev/badge/Ormissia/ormissia_go.svg)](https://pkg.go.dev/github.com/ormissia/go-gin-blog)
+![Project Label](https://badgen.net/badge/github/Blog/blue?label=Golang) [![Go Reference](https://pkg.go.dev/badge/Ormissia/ormissia_go.svg)](https://pkg.go.dev/github.com/ormissia/go-gin-blog) [![Go Report Card](https://goreportcard.com/badge/github.com/ormissia/go-gin-blog)](https://goreportcard.com/report/github.com/ormissia/go-gin-blog)
 
 > 为了功能上线方便，采用了Docker的方式部署程序
 
