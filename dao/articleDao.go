@@ -28,7 +28,7 @@ func SelectArticleById(id string) (article *model.Article, err error) {
 		Preload("User").
 		Preload("Type").
 		Preload("Tags").
-		Where("id = ?", id).First(&article).Error
+		Where("id = ? and is_published = 1", id).First(&article).Error
 	if err != nil {
 		return nil, err
 	}
