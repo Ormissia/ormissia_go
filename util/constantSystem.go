@@ -2,6 +2,7 @@
 // @Date: 2020/12/7 9:01
 // @Author: 安红豆
 // @Description: 系统运行相关常量
+
 package util
 
 const (

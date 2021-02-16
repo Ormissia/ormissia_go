@@ -2,20 +2,19 @@
 // @Date: 2020/12/6 22:04
 // @Author: 安红豆
 // @Description: 数据库连接的测试类
+
 package database
 
 import (
 	"fmt"
-	"github.com/ormissia/go-gin-blog/common"
-	"github.com/ormissia/go-gin-blog/util"
 	"testing"
 )
 
 func TestInitMySql(t *testing.T) {
 
-	path := "../../"
+	//path := "../../"
 	//初始化配置文件
-	common.InitApplicationConfig(path, util.ConfigFileName)
+	//common.InitApplicationConfig(path, util.ConfigFileName)
 
 	InitMySql()
 	db := DB

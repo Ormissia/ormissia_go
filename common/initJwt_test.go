@@ -2,6 +2,7 @@
 // @Date: 2020/12/12 9:16
 // @Author: 安红豆
 // @Description: token生成的测试类
+
 package common
 
 import (

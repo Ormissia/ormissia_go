@@ -2,6 +2,7 @@
 // @Date: 2020/12/10 16:40
 // @Author: 安红豆
 // @Description: 类型
+
 package model
 
 import "gorm.io/gorm"

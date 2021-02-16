@@ -2,6 +2,7 @@
 // @Date: 2020/12/7 9:16
 // @Author: 安红豆
 // @Description: 初始化配置文件实例的测试类
+
 package common
 
 import (
@@ -11,10 +12,6 @@ import (
 )
 
 func TestInitApplicationConfig(t *testing.T) {
-
-	path := "../../"
-
-	InitApplicationConfig(path, util.ConfigFileName)
 
 	tests := []struct{ a, b string }{
 		{util.ConfigServerPort, "8085"},

@@ -1,7 +1,8 @@
 // @File: userDao
 // @Date: 2020/12/14 14:56
 // @Author: 安红豆
-// @Description:
+// @Description: 用户的数据库层操作
+
 package dao
 
 import (
