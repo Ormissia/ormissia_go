@@ -59,7 +59,16 @@ func (w *ArticleController) SelectArticleById(ctx *gin.Context) {
 	//从请求中获取要查询的文章id
 	//articleId := ctx.Query("articleId")
 	articleId := ctx.PostForm("articleId")
-	article, err := dao.SelectArticleById(articleId)
+	isPublished := ctx.PostForm("isPublished")
+
+	var article *model.Article
+	var err error
+	//当isPublished为空字符串时即为前台的查询，不允许查询未发布的文章，并且查询时需要更新访客数量
+	if isPublished == "" {
+		article, err = dao.SelectArticleByIdAndUpdateVisits(articleId)
+	} else {
+		article, err = dao.SelectArticleById(articleId)
+	}
 	if err != nil {
 		util.Error(ctx, err.Error(), nil)
 		return

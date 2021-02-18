@@ -20,8 +20,8 @@ func InsertArticle(article model.Article) (err error) {
 //删
 
 //查
-//根据id查询文章详情
-func SelectArticleById(id string) (article *model.Article, err error) {
+//根据id查询文章详情并更新访客数量
+func SelectArticleByIdAndUpdateVisits(id string) (article *model.Article, err error) {
 	//赋值给article
 	article = &model.Article{}
 	//查询文章信息并将文章访客数量自增一
@@ -42,6 +42,22 @@ func SelectArticleById(id string) (article *model.Article, err error) {
 		}
 		return nil
 	})
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+//根据id查询文章详情
+func SelectArticleById(id string) (article *model.Article, err error) {
+	//赋值给article
+	article = &model.Article{}
+	//查询文章信息
+	err = database.DB.Table("article").
+		Preload("User").
+		Preload("Type").
+		Preload("Tags").
+		Where("id = ?", id).First(&article).Error
 	if err != nil {
 		return nil, err
 	}
