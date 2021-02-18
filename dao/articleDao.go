@@ -24,12 +24,24 @@ func InsertArticle(article model.Article) (err error) {
 func SelectArticleById(id string) (article *model.Article, err error) {
 	//赋值给article
 	article = &model.Article{}
-	//查询文章信息
-	err = database.DB.Table("article").
-		Preload("User").
-		Preload("Type").
-		Preload("Tags").
-		Where("id = ? and is_published = 1", id).First(&article).Error
+	//查询文章信息并将文章访客数量自增一
+	err = database.DB.Transaction(func(tx *gorm.DB) error {
+		//查询文章
+		if err := database.DB.Table("article").
+			Preload("User").
+			Preload("Type").
+			Preload("Tags").
+			Where("id = ? and is_published = 1", id).First(&article).Error; err != nil {
+			return err
+		}
+		//访客数量自增一
+		if err := database.DB.Model(&article).
+			Where("id = ?", id).
+			Update("visits", gorm.Expr("visits + 1")).Error; err != nil {
+			return err
+		}
+		return nil
+	})
 	if err != nil {
 		return nil, err
 	}
