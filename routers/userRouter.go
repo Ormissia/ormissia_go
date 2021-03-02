@@ -16,7 +16,8 @@ func UserRouter(e *gin.Engine) {
 	//路由组
 	user := e.Group("/api/user")
 	{
-		user.POST("/register", userController.Register)
+		//隐藏注册接口Casbin过一阵再写吧
+		//user.POST("/register", userController.Register)
 		user.POST("/login", userController.Login)
 	}
 }
