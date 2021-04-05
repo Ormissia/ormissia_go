@@ -19,4 +19,5 @@ func main() {
 	database.InitMySql()
 	//初始化路由并运行
 	routers.InitRouter()
+
 }
